@@ -1,0 +1,53 @@
+dist: trusty
+sudo: required
+
+services: docker
+
+language: bash
+
+branches:
+  only:
+    - master
+
+before_script:
+  - env | sort
+  - name="taiga-front"
+  - image="monogramm/docker-taiga-front:travis"
+  - dir="images/${VERSION}/"
+
+script:
+  - travis_retry docker build -t "$image" "$dir"
+
+after_script:
+  - docker images
+  - docker run --name "$name" -d "$image" "$dir"
+  - docker ps
+  - docker logs "$name"
+
+notifications:
+  email: false
+
+env: # Environments
+    - VERSION=4.2 VARIANT=alpine
+    - VERSION=4.1 VARIANT=alpine
+    - VERSION=4.0 VARIANT=alpine
+    - VERSION=4.0 VARIANT=alpine
+    - VERSION=4.0 VARIANT=alpine
+    - VERSION=3.4 VARIANT=alpine
+    - VERSION=3.4 VARIANT=alpine
+    - VERSION=3.4 VARIANT=alpine
+    - VERSION=3.4 VARIANT=alpine
+    - VERSION=3.4 VARIANT=alpine
+    - VERSION=3.4 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
+    - VERSION=3.3 VARIANT=alpine
