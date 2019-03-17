@@ -3,9 +3,9 @@ FROM nginx:alpine
 LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
 
 ENV TAIGA_VERSION=3.4.6 \
+    TAIGA_HOSTNAME=localhost \
 	TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
-    TAIGA_HOSTNAME=localhost \
     RABBIT_PORT_5672_TCP_ADDR=''
 
 VOLUME /taiga
