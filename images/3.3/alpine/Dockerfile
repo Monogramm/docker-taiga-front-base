@@ -27,7 +27,7 @@ RUN set -ex; \
 	#ln -sf /dev/stderr /var/log/nginx/error.log; \
     # Install Taiga from tag archive
     mkdir -p /tmp/taiga-front-dist; \
-	tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -d /tmp/taiga-front-dist; \
+	tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
 	rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
 	mkdir -p /usr/src/taiga-front-dist; \
 	cp -r /tmp/taiga-front-dist/taiga-front-dist-${TAIGA_VERSION}-stable/* /usr/src/taiga-front-dist; \
