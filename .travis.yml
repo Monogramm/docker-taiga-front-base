@@ -12,15 +12,15 @@ branches:
 before_script:
   - env | sort
   - name="taiga-front"
-  - image="monogramm/docker-taiga-front-base:travis-${VERSION}-${VARIANT}"
-  - dir="./images/${VERSION}/${VARIANT}"
+  - image="monogramm/docker-taiga-front-base:travis-${VERSION}${VARIANT:+-$VARIANT}"
+  - dir="images/${VERSION}/${VARIANT}"
 
 script:
   - travis_retry docker build -t "$image" "$dir"
 
 after_script:
   - docker images
-  - docker run --name "$name" -d "$image" "$dir"
+  - docker run --name "$name" -d "$image"
   - docker ps
   - docker logs "$name"
 
