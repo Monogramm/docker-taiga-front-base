@@ -22,7 +22,7 @@ COPY conf/taiga/conf.json /taiga/conf.json
 # Get Taiga
 ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
 
-# Install packages
+# Install the packages we need
 # forward request and error logs to docker log collector
 #   ln -sf /dev/stdout /var/log/nginx/access.log; \
 #   ln -sf /dev/stderr /var/log/nginx/error.log; \
@@ -35,6 +35,7 @@ RUN set -ex; \
         gettext \
         tar \
     ; \
+    chmod 755 /entrypoint.sh; \
     mkdir -p /tmp/taiga-front-dist; \
 	tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
 	rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
