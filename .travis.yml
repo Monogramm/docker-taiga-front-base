@@ -12,7 +12,7 @@ branches:
 before_script:
   - env | sort
   - name="taiga-front"
-  - image="monogramm/docker-taiga-front:travis"
+  - image="monogramm/docker-taiga-front-base:travis"
   - dir="images/${VERSION}/"
 
 script:
