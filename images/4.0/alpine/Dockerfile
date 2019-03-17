@@ -14,7 +14,7 @@ COPY conf/nginx /etc/
 COPY conf/taiga/conf.json /taiga/conf.json
 
 # Get Taiga
-ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
+ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
 
 RUN set -ex; \
     apk add --no-cache \
