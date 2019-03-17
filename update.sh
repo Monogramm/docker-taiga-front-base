@@ -1,10 +1,6 @@
 #!/bin/bash
 set -eo pipefail
 
-declare -A cmd=(
-	[alpine]='php-fpm'
-)
-
 declare -A base=(
 	[alpine]='alpine'
 )
@@ -21,10 +17,10 @@ function version_greater_or_equal() {
 	[[ "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1" || "$1" == "$2" ]];
 }
 
-dockerRepo="monogramm/docker-taiga-front"
-latests=( $( curl -fsSL 'https://api.github.com/repos/taigaio/taiga-front-dist/tags' |tac|tac|tac| \
+dockerRepo="monogramm/docker-taiga-front-base"
+latests=( $( curl -fsSL 'https://api.github.com/repos/taigaio/taiga-front-dist/tags' |tac|tac| \
 	grep -oE '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+' | \
-	sort -uV ) )
+	sort -urV ) )
 
 # Remove existing images
 echo "reset docker images"
@@ -35,18 +31,17 @@ travisEnv=
 for latest in "${latests[@]}"; do
 	version=$(echo "$latest" | cut -d. -f1-2)
 
-	if [ -d "$version" ]; then
-		continue
-	fi
-
 	# Only add versions >= "$min_version"
 	if version_greater_or_equal "$version" "$min_version"; then
 
         for variant in "${variants[@]}"; do
-            echo "updating $latest [$version] $variant"
-
             # Create the version+variant directory with a Dockerfile.
             dir="images/$version/$variant"
+            if [ -d "$dir" ]; then
+                continue
+            fi
+
+            echo "generating $latest [$version] $variant"
             mkdir -p "$dir"
 
             template="Dockerfile-${base[$variant]}.template"
@@ -56,7 +51,6 @@ for latest in "${latests[@]}"; do
             sed -ri -e '
                 s/%%VARIANT%%/'"$variant"'/g;
                 s/%%VERSION%%/'"$latest"'/g;
-                s/%%CMD%%/'"${cmd[$variant]}"'/g;
             ' "$dir/Dockerfile"
 
             # Copy the scripts
