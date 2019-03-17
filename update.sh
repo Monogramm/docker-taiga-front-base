@@ -1,10 +1,6 @@
 #!/bin/bash
 set -eo pipefail
 
-declare -A cmd=(
-	[alpine]='php-fpm'
-)
-
 declare -A base=(
 	[alpine]='alpine'
 )
@@ -55,7 +51,6 @@ for latest in "${latests[@]}"; do
             sed -ri -e '
                 s/%%VARIANT%%/'"$variant"'/g;
                 s/%%VERSION%%/'"$latest"'/g;
-                s/%%CMD%%/'"${cmd[$variant]}"'/g;
             ' "$dir/Dockerfile"
 
             # Copy the scripts
