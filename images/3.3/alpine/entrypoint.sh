@@ -26,5 +26,22 @@ elif grep -q "wss://" "/taiga/conf.json"; then
   sed -i "s/wss:\/\//ws:\/\//g" /taiga/conf.json
 fi
 
+# Look to see if we should update the backend connection
+if [ -n "$TAIGA_BACK_HOST" ]; then
+  echo "Updating Taiga Back connection"
+  sed -i \
+    -e "s|proxy_pass http://.*/api|proxy_pass http://$TAIGA_BACK_HOST:$TAIGA_BACK_PORT/api|g" \
+    -e "s|proxy_pass http://.*\$request_uri|proxy_pass http://$TAIGA_BACK_HOST:$TAIGA_BACK_PORT\$request_uri|g" \
+    /etc/nginx/conf.d/default.conf
+fi
+
+# Look to see if we should update the events connection
+if [ -n "$TAIGA_EVENTS_HOST" ]; then
+  echo "Updating Taiga Events connection"
+  sed -i \
+    -e "s|proxy_pass http://.*/events|proxy_pass http://$TAIGA_EVENTS_HOST:$TAIGA_EVENTS_PORT/events|g" \
+    /etc/nginx/conf.d/default.conf
+fi
+
 # Start nginx server
 nginx -g "daemon off;"

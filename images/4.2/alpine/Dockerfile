@@ -6,6 +6,10 @@ ENV TAIGA_VERSION=4.2.0 \
     TAIGA_HOSTNAME=localhost \
 	TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
+    TAIGA_BACK_HOST=taigaback \
+    TAIGA_BACK_PORT=8000 \
+    TAIGA_EVENTS_HOST=taigaevents \
+    TAIGA_EVENTS_PORT=8888 \
     RABBIT_PORT_5672_TCP_ADDR=''
 
 VOLUME /taiga
@@ -37,3 +41,5 @@ RUN set -ex; \
     # Backwards compatibility
 	mkdir -p /usr/src/taiga-front-dist/dist/js/; \
     ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/js/conf.json
+
+ENTRYPOINT ["/entrypoint.sh"]
