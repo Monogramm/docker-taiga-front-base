@@ -13,7 +13,7 @@ before_script:
   - env | sort
   - name="taiga-front"
   - image="monogramm/docker-taiga-front-base:travis-${VERSION}-${VARIANT}"
-  - dir="images/${VERSION}/${VARIANT}/"
+  - dir="./images/${VERSION}/${VARIANT}"
 
 script:
   - travis_retry docker build -t "$image" "$dir"
