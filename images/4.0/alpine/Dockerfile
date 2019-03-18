@@ -46,4 +46,7 @@ RUN set -ex; \
 	mkdir -p /usr/src/taiga-front-dist/dist/js/; \
     ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/js/conf.json
 
+# Frontend healthcheck
+HEALTHCHECK CMD curl --fail http://localhost:80/conf.json || exit 1
+
 ENTRYPOINT ["/entrypoint.sh"]
