@@ -32,6 +32,7 @@ ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.
 RUN set -ex; \
     apk add --no-cache \
         ca-certificates \
+        curl \
         gettext \
         tar \
     ; \
