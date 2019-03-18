@@ -1,7 +1,7 @@
 {
     "api": "http://TAIGA_HOSTNAME/api/v1/",
     "eventsUrl": null,
-    "debug": true,
+    "debug": false,
     "debugInfo": false,
     "defaultLanguage": "en",
     "publicRegisterEnabled": false,
