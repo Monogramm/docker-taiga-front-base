@@ -145,6 +145,22 @@ else
     /taiga/conf.json
 fi
 
+if [ -n "$TAIGA_IMPORTERS" ]; then
+  echo "Updating Taiga Front importers list: $TAIGA_IMPORTERS"
+  importers_list=
+  for importer in $TAIGA_IMPORTERS ; do
+    importers_list="$importers_list \"$importer\",";
+  done
+  sed -i \
+    -e "s|\"importers\": [.*],|\"importers\": [${importers_list::-1}],|g" \
+    /taiga/conf.json
+else
+  echo "Reset Taiga Front importers list"
+  sed -i \
+    -e "s|\"importers\": [.*],|\"importers\": [],|g" \
+    /taiga/conf.json
+fi
+
 if [ -n "$TAIGA_GRAVATAR" ]; then
   echo "Updating Taiga Front Gravatar status: $TAIGA_GRAVATAR"
   sed -i \
