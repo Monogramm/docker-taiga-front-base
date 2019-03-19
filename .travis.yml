@@ -21,8 +21,7 @@ script:
 after_script:
   - docker images
   - docker run --name "$name" -d "$image"
-  - docker logs "$name"
-  - travis_retry docker ps | grep 'healthy'
+  - docker ps
   - docker logs "$name"
 
 notifications:
