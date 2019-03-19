@@ -131,12 +131,9 @@ fi
 
 if [ -n "$TAIGA_CONTRIB_PLUGINS" ]; then
   echo "Updating Taiga Front contribution plugins list: $TAIGA_CONTRIB_PLUGINS"
-  IFS=,
-  plugins=($TAIGA_CONTRIB_PLUGINS)
   plugins_list=
-  for key in "${!plugins[@]}";
-  do
-    plugins_list="$plugins_list \"/plugins/${plugins[$key]}/${plugins[$key]}.json\",";
+  for plugin in $TAIGA_CONTRIB_PLUGINS ; do
+    plugins_list="$plugins_list \"/plugins/$plugin/$plugin.json\",";
   done
   sed -i \
     -e "s|\"contribPlugins\": [.*],|\"contribPlugins\": [${plugins_list::-1}],|g" \

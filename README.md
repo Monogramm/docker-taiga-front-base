@@ -212,7 +212,7 @@ Taiga frontend plugins installed.
 Examples:
 ```
 TAIGA_CONTRIB_PLUGINS=slack
-TAIGA_CONTRIB_PLUGINS=slack,call-to-action,cookie-warning
+TAIGA_CONTRIB_PLUGINS='slack call-to-action cookie-warning'
 TAIGA_CONTRIB_PLUGINS=''
 ```
 
