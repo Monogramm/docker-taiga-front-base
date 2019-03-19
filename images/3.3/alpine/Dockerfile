@@ -2,11 +2,24 @@ FROM nginx:alpine
 
 LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
 
-# Taiga nginx, back, and events properties
+# Taiga nginx, back, front and events properties
 ENV TAIGA_VERSION=3.3.15 \
     TAIGA_HOSTNAME=localhost \
 	TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
+    TAIGA_DEBUG=false \
+    TAIGA_DEBUG_INFO=false \
+    TAIGA_DEFAULT_LANGUAGE=en \
+    TAIGA_DEFAULT_THEME=taiga \
+    TAIGA_PUBLIC_REGISTER_ENABLED=false \
+    TAIGA_SUPPORT_URL=https://tree.taiga.io/support \
+    TAIGA_PRIVACY_POLICY_URL='' \
+    TAIGA_TOS_URL='' \
+    TAIGA_GDPR_URL='' \
+    TAIGA_MAX_UPLOAD_SIZE=104857600 \
+    TAIGA_CONTRIB_PLUGINS='' \
+    TAIGA_GRAVATAR=true \
+    TAIGA_LOGIN_FORM_TYPE=normal \
     TAIGA_BACK_HOST=taigaback \
     TAIGA_BACK_PORT=8000 \
     TAIGA_EVENTS_HOST=taigaevents \
@@ -32,6 +45,7 @@ ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.
 RUN set -ex; \
     apk add --no-cache \
         ca-certificates \
+        curl \
         gettext \
         tar \
     ; \
@@ -45,5 +59,8 @@ RUN set -ex; \
 	ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/conf.json; \
 	mkdir -p /usr/src/taiga-front-dist/dist/js/; \
     ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/js/conf.json
+
+# Frontend healthcheck
+HEALTHCHECK CMD curl --fail http://localhost:80/conf.json || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]
