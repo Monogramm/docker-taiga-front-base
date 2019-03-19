@@ -216,6 +216,19 @@ TAIGA_CONTRIB_PLUGINS='slack call-to-action cookie-warning'
 TAIGA_CONTRIB_PLUGINS=''
 ```
 
+### TAIGA_IMPORTERS
+
+*Default value*: `''`
+
+Taiga frontend importers installed.
+
+Examples:
+```
+TAIGA_IMPORTERS=github
+TAIGA_IMPORTERS='github jira trello asana'
+TAIGA_IMPORTERS=''
+```
+
 ### TAIGA_GRAVATAR
 
 *Default value*: `true`

@@ -18,12 +18,7 @@
     "maxUploadFileSize": 104857600,
     "contribPlugins": [],
     "tribeHost": null,
-    "importers": [
-        "github",
-        "jira",
-        "trello",
-        "asana"
-    ],
+    "importers": [],
     "gravatar": true,
     "rtlLanguages": ["fa", "he"],
     "loginFormType": "normal"
