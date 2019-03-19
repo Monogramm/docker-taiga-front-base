@@ -16,12 +16,13 @@ before_script:
   - dir="images/${VERSION}/${VARIANT}"
 
 script:
-  - travis_retry docker build -t "$image" "$dir"
+  - docker build -t "$image" "$dir"
 
 after_script:
   - docker images
   - docker run --name "$name" -d "$image"
-  - docker ps
+  - docker logs "$name"
+  - travis_retry docker ps | grep 'healthy'
   - docker logs "$name"
 
 notifications:
