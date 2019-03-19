@@ -5,7 +5,7 @@ LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
 # Taiga nginx, back, front and events properties
 ENV TAIGA_VERSION=3.4.6 \
     TAIGA_HOSTNAME=localhost \
-	TAIGA_SSL=False \
+    TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
     TAIGA_DEBUG=false \
     TAIGA_DEBUG_INFO=false \
@@ -31,7 +31,7 @@ VOLUME /taiga
 
 COPY entrypoint.sh /
 COPY conf/nginx /etc/
-COPY conf/taiga/conf.json /taiga/conf.json
+COPY conf/taiga/conf.json /taiga/
 
 # Get Taiga
 ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
@@ -52,13 +52,13 @@ RUN set -ex; \
     ; \
     chmod 755 /entrypoint.sh; \
     mkdir -p /tmp/taiga-front-dist; \
-	tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
-	rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
-	mkdir -p /usr/src/taiga-front-dist; \
-	cp -r /tmp/taiga-front-dist/taiga-front-dist-${TAIGA_VERSION}-stable/* /usr/src/taiga-front-dist; \
-	rm -rf /tmp/taiga-front-dist; \
-	ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/conf.json; \
-	mkdir -p /usr/src/taiga-front-dist/dist/js/; \
+    tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
+    rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
+    mkdir -p /usr/src/taiga-front-dist; \
+    cp -r /tmp/taiga-front-dist/taiga-front-dist-${TAIGA_VERSION}-stable/* /usr/src/taiga-front-dist; \
+    rm -rf /tmp/taiga-front-dist; \
+    ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/conf.json; \
+    mkdir -p /usr/src/taiga-front-dist/dist/js/; \
     ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/js/conf.json
 
 # Frontend healthcheck
