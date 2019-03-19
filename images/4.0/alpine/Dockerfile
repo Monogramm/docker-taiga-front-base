@@ -31,7 +31,7 @@ VOLUME /taiga
 
 COPY entrypoint.sh /
 COPY conf/nginx /etc/
-COPY conf/taiga/conf.json /taiga/conf.json
+COPY conf/taiga/conf.json /taiga/
 
 # Get Taiga
 ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
