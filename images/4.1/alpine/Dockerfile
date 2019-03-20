@@ -54,6 +54,8 @@ RUN set -ex; \
     ; \
     chmod 755 /entrypoint.sh; \
     rm -f /etc/nginx/sites-enabled/default; \
+    #sed -i "s/user www-data/user root/g" /etc/nginx/nginx.conf; \
+    #sed -i "s/worker_connections 768/worker_connections 1024/g" /etc/nginx/nginx.conf; \
     mkdir -p /tmp/taiga-front-dist; \
     tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
     rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
