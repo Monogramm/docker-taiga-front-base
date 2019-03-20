@@ -3,7 +3,7 @@ FROM nginx:alpine
 LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
 
 # Taiga nginx, back, front and events properties
-ENV TAIGA_VERSION=4.2.0 \
+ENV TAIGA_VERSION=4.2.1 \
     TAIGA_HOSTNAME=localhost \
     TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
@@ -30,7 +30,9 @@ ENV TAIGA_VERSION=4.2.0 \
 VOLUME /taiga
 
 COPY entrypoint.sh /
-COPY conf/nginx /etc/
+COPY conf/nginx/nginx.conf          /etc/
+COPY conf/nginx/sites-available/*   /etc/nginx/sites-available/
+COPY conf/nginx/snippets/*          /etc/nginx/snippets/
 COPY conf/taiga/conf.json /taiga/
 
 # Get Taiga
@@ -51,6 +53,7 @@ RUN set -ex; \
         tar \
     ; \
     chmod 755 /entrypoint.sh; \
+    rm -f /etc/nginx/sites-enabled/default; \
     mkdir -p /tmp/taiga-front-dist; \
     tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
     rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
