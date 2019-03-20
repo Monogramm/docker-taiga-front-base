@@ -198,26 +198,30 @@ fi
 #########################################
 
 # Reinitialize nginx links
-rm /etc/nginx/sites-enabled/*
+if [ -d /etc/nginx/sites-enabled/ ]; then
+  rm /etc/nginx/sites-enabled/*
+  mkdir -p /etc/nginx/sites-enabled/
+fi
+
 if [ "$TAIGA_SSL" = "True" ]; then
-  if [ ! -z "$RABBIT_PORT_5672_TCP_ADDR" ]; then
-    ln -s \
-      /etc/nginx/sites-available/taiga-ssl \
-      /etc/nginx/sites-enabled/taiga-events-ssl
-  else
+  if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
       /etc/nginx/sites-available/taiga-ssl \
       /etc/nginx/sites-enabled/taiga-ssl
+  else
+    ln -s \
+      /etc/nginx/sites-available/taiga-ssl \
+      /etc/nginx/sites-enabled/taiga-events-ssl
   fi
 else
-  if [ ! -z "$RABBIT_PORT_5672_TCP_ADDR" ]; then
-    ln -s \
-      /etc/nginx/sites-available/taiga \
-      /etc/nginx/sites-enabled/taiga-events
-  else
+  if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
       /etc/nginx/sites-available/taiga \
       /etc/nginx/sites-enabled/taiga
+  else
+    ln -s \
+      /etc/nginx/sites-available/taiga \
+      /etc/nginx/sites-enabled/taiga-events
   fi
 fi
 
