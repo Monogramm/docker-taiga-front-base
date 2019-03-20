@@ -68,5 +68,7 @@ RUN set -ex; \
 
 # Frontend healthcheck
 HEALTHCHECK CMD curl --fail http://localhost:80/conf.json || exit 1
+#    && curl --fail http://localhost
+#    && curl --fail http://localhost/api/v1/
 
 ENTRYPOINT ["/entrypoint.sh"]

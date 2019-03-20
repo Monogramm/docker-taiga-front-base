@@ -208,21 +208,21 @@ if [ "$TAIGA_SSL" = "True" ]; then
   if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
       /etc/nginx/sites-available/taiga-ssl.conf \
-      /etc/nginx/sites-enabled/taiga-ssl.conf
+      /etc/nginx/sites-enabled/taiga-ssl
   else
     ln -s \
       /etc/nginx/sites-available/taiga-ssl.conf \
-      /etc/nginx/sites-enabled/taiga-events-ssl.conf
+      /etc/nginx/sites-enabled/taiga-events-ssl
   fi
 else
   if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
       /etc/nginx/sites-available/taiga.conf \
-      /etc/nginx/sites-enabled/taiga.conf
+      /etc/nginx/sites-enabled/taiga
   else
     ln -s \
       /etc/nginx/sites-available/taiga.conf \
-      /etc/nginx/sites-enabled/taiga-events.conf
+      /etc/nginx/sites-enabled/taiga-events
   fi
 fi
 
