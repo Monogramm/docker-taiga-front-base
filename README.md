@@ -86,7 +86,7 @@ Examples:
 ```
 TAIGA_DEBUG=false
 TAIGA_DEBUG=true
-TAIGA_DEBUG=''
+TAIGA_DEBUG=
 ```
 
 ### TAIGA_DEBUG_INFO
@@ -99,7 +99,7 @@ Examples:
 ```
 TAIGA_DEBUG_INFO=false
 TAIGA_DEBUG_INFO=true
-TAIGA_DEBUG_INFO=''
+TAIGA_DEBUG_INFO=
 ```
 
 ### TAIGA_DEFAULT_LANGUAGE
@@ -137,7 +137,7 @@ Examples:
 ```
 TAIGA_PUBLIC_REGISTER_ENABLED=false
 TAIGA_PUBLIC_REGISTER_ENABLED=true
-TAIGA_PUBLIC_REGISTER_ENABLED=''
+TAIGA_PUBLIC_REGISTER_ENABLED=
 ```
 
 ### TAIGA_SUPPORT_URL
@@ -150,12 +150,12 @@ Examples:
 ```
 TAIGA_SUPPORT_URL=https://tree.taiga.io/support
 TAIGA_SUPPORT_URL=https://taiga.company.com/support
-TAIGA_SUPPORT_URL=''
+TAIGA_SUPPORT_URL=
 ```
 
 ### TAIGA_PRIVACY_POLICY_URL
 
-*Default value*: `''`
+*Default value*:
 
 Taiga frontend privacy policy URL.
 
@@ -163,12 +163,12 @@ Examples:
 ```
 TAIGA_PRIVACY_POLICY_URL=https://taiga.io/privacy-policy.html
 TAIGA_PRIVACY_POLICY_URL=https://taiga.company.com/privacy-policy
-TAIGA_PRIVACY_POLICY_URL=''
+TAIGA_PRIVACY_POLICY_URL=
 ```
 
 ### TAIGA_TOS_URL
 
-*Default value*: `''`
+*Default value*:
 
 Taiga frontend terms of services URL.
 
@@ -176,12 +176,12 @@ Examples:
 ```
 TAIGA_TOS_URL=https://taiga.io/terms-of-service.html
 TAIGA_TOS_URL=https://taiga.company.com/terms-of-service
-TAIGA_TOS_URL=''
+TAIGA_TOS_URL=
 ```
 
 ### TAIGA_GDPR_URL
 
-*Default value*: `''`
+*Default value*:
 
 Taiga frontend GDPR compliance URL.
 
@@ -189,7 +189,7 @@ Examples:
 ```
 TAIGA_GDPR_URL=https://taiga.io/gdpr-compliance.html
 TAIGA_GDPR_URL=https://taiga.company.com/gdpr-compliance
-TAIGA_GDPR_URL=''
+TAIGA_GDPR_URL=
 ```
 
 ### TAIGA_MAX_UPLOAD_SIZE
@@ -202,12 +202,12 @@ Examples:
 ```
 TAIGA_MAX_UPLOAD_SIZE=104857600
 TAIGA_MAX_UPLOAD_SIZE=20480
-TAIGA_MAX_UPLOAD_SIZE=''
+TAIGA_MAX_UPLOAD_SIZE=
 ```
 
 ### TAIGA_CONTRIB_PLUGINS
 
-*Default value*: `''`
+*Default value*:
 
 Taiga frontend plugins installed.
 
@@ -215,12 +215,12 @@ Examples:
 ```
 TAIGA_CONTRIB_PLUGINS=slack
 TAIGA_CONTRIB_PLUGINS='slack call-to-action cookie-warning'
-TAIGA_CONTRIB_PLUGINS=''
+TAIGA_CONTRIB_PLUGINS=
 ```
 
 ### TAIGA_IMPORTERS
 
-*Default value*: `''`
+*Default value*:
 
 Taiga frontend importers installed.
 
@@ -228,7 +228,7 @@ Examples:
 ```
 TAIGA_IMPORTERS=github
 TAIGA_IMPORTERS='github jira trello asana'
-TAIGA_IMPORTERS=''
+TAIGA_IMPORTERS=
 ```
 
 ### TAIGA_GRAVATAR
@@ -241,7 +241,7 @@ Examples:
 ```
 TAIGA_GRAVATAR=false
 TAIGA_GRAVATAR=true
-TAIGA_GRAVATAR=''
+TAIGA_GRAVATAR=
 ```
 
 ### TAIGA_LOGIN_FORM_TYPE
@@ -253,7 +253,7 @@ Taiga frontend login form type.
 Examples:
 ```
 TAIGA_LOGIN_FORM_TYPE=normal
-TAIGA_LOGIN_FORM_TYPE=''
+TAIGA_LOGIN_FORM_TYPE=
 ```
 
 ### TAIGA_BACK_HOST
@@ -306,12 +306,12 @@ TAIGA_EVENTS_PORT=18888
 
 ### RABBIT_PORT_5672_TCP_ADDR
 
-*Default value*: `''`
+*Default value*:
 
 Enable Taiga events URL.
 
 Examples:
 ```
 RABBIT_PORT_5672_TCP_ADDR=1
-RABBIT_PORT_5672_TCP_ADDR=''
+RABBIT_PORT_5672_TCP_ADDR=
 ```
