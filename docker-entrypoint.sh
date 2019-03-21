@@ -38,7 +38,6 @@ elif [ "$TAIGA_SSL" = "True" ]; then
     -e "s|http://|https://|g" \
     -e "s|ws://|wss://|g" \
     /taiga/conf.json
-  mv /etc/nginx/ssl.conf /etc/nginx/conf.d/default.conf
 elif grep -q "wss://" "/taiga/conf.json"; then
   echo "Disabling SSL support!"
   sed -i \
@@ -198,29 +197,29 @@ fi
 #########################################
 
 # Reinitialize nginx links
-if [ -e /etc/nginx/conf.d/default.conf ]; then
-  rm -f /etc/nginx/conf.d/default.conf
+if [ -d /etc/nginx/conf.d/ ]; then
+  rm -f /etc/nginx/conf.d/*.conf
 fi
 
 if [ "$TAIGA_SSL" = "True" ]; then
   if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
-      /etc/nginx/sites-available/taiga-ssl.conf \
-      /etc/nginx/conf.d/default.conf
+      /etc/nginx/sites-available/taiga-events-ssl.conf \
+      /etc/nginx/conf.d/taiga.conf
   else
     ln -s \
-      /etc/nginx/sites-available/taiga-events-ssl.conf \
-      /etc/nginx/conf.d/default.conf
+      /etc/nginx/sites-available/taiga-ssl.conf \
+      /etc/nginx/conf.d/taiga.conf
   fi
 else
   if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
-      /etc/nginx/sites-available/taiga.conf \
-      /etc/nginx/conf.d/default.conf
+      /etc/nginx/sites-available/taiga-events.conf \
+      /etc/nginx/conf.d/taiga.conf
   else
     ln -s \
-      /etc/nginx/sites-available/taiga-events.conf \
-      /etc/nginx/conf.d/default.conf
+      /etc/nginx/sites-available/taiga.conf \
+      /etc/nginx/conf.d/taiga.conf
   fi
 fi
 
