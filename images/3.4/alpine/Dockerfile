@@ -50,7 +50,6 @@ RUN set -ex; \
         tar \
     ; \
     chmod 755 /entrypoint.sh; \
-    rm -f /etc/nginx/sites-enabled/default; \
     mkdir -p /tmp/taiga-front-dist; \
     tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
     rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
