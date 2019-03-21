@@ -39,9 +39,6 @@ COPY conf/taiga/conf.json /taiga/
 ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
 
 # Install the packages we need
-# forward request and error logs to docker log collector
-#   ln -sf /dev/stdout /var/log/nginx/access.log; \
-#   ln -sf /dev/stderr /var/log/nginx/error.log; \
 # Install Taiga from tag archive
 # Setup symbolic links for configuration files
 # Backwards compatibility
@@ -54,8 +51,6 @@ RUN set -ex; \
     ; \
     chmod 755 /entrypoint.sh; \
     rm -f /etc/nginx/sites-enabled/default; \
-    #sed -i "s/user www-data/user root/g" /etc/nginx/nginx.conf; \
-    #sed -i "s/worker_connections 768/worker_connections 1024/g" /etc/nginx/nginx.conf; \
     mkdir -p /tmp/taiga-front-dist; \
     tar xzf /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz -C /tmp/taiga-front-dist; \
     rm /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz; \
@@ -65,8 +60,5 @@ RUN set -ex; \
     ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/conf.json; \
     mkdir -p /usr/src/taiga-front-dist/dist/js/; \
     ln -s /taiga/conf.json /usr/src/taiga-front-dist/dist/js/conf.json
-
-# Frontend healthcheck
-HEALTHCHECK CMD curl --fail http://localhost:80/conf.json || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -198,31 +198,29 @@ fi
 #########################################
 
 # Reinitialize nginx links
-if [ -d /etc/nginx/sites-enabled/ ]; then
-  rm /etc/nginx/sites-enabled/*
-else
-  mkdir -p /etc/nginx/sites-enabled/
+if [ -e /etc/nginx/conf.d/default.conf ]; then
+  rm -f /etc/nginx/conf.d/default.conf
 fi
 
 if [ "$TAIGA_SSL" = "True" ]; then
   if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
       /etc/nginx/sites-available/taiga-ssl.conf \
-      /etc/nginx/sites-enabled/taiga-ssl.conf
+      /etc/nginx/conf.d/default.conf
   else
     ln -s \
-      /etc/nginx/sites-available/taiga-ssl.conf \
-      /etc/nginx/sites-enabled/taiga-events-ssl.conf
+      /etc/nginx/sites-available/taiga-events-ssl.conf \
+      /etc/nginx/conf.d/default.conf
   fi
 else
   if [ -n "$RABBIT_PORT_5672_TCP_ADDR" ]; then
     ln -s \
       /etc/nginx/sites-available/taiga.conf \
-      /etc/nginx/sites-enabled/taiga.conf
+      /etc/nginx/conf.d/default.conf
   else
     ln -s \
-      /etc/nginx/sites-available/taiga.conf \
-      /etc/nginx/sites-enabled/taiga-events.conf
+      /etc/nginx/sites-available/taiga-events.conf \
+      /etc/nginx/conf.d/default.conf
   fi
 fi
 
@@ -230,11 +228,8 @@ fi
 if [ -n "$TAIGA_BACK_HOST" ]; then
   echo "Updating Taiga Back connection: $TAIGA_BACK_HOST"
   sed -i \
-    -e "s|proxy_pass http://.*/api|proxy_pass http://$TAIGA_BACK_HOST:$TAIGA_BACK_PORT/api|g" \
-    /etc/nginx/snippets/api.conf
-  sed -i \
-    -e "s|proxy_pass http://.*\$request_uri|proxy_pass http://$TAIGA_BACK_HOST:$TAIGA_BACK_PORT\$request_uri|g" \
-    /etc/nginx/snippets/admin.conf
+    -e "s|server .*;|server $TAIGA_BACK_HOST:$TAIGA_BACK_PORT;|g" \
+    /etc/nginx/snippets/upstream.conf
 fi
 
 # Look to see if we should update the events connection
