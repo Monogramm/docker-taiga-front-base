@@ -270,13 +270,13 @@ TAIGA_BACK_HOST=back
 
 ### TAIGA_BACK_PORT
 
-*Default value*: `8000`
+*Default value*: `8001`
 
 Taiga backend port for Nginx proxy.
 
 Examples:
 ```
-TAIGA_BACK_PORT=8000
+TAIGA_BACK_PORT=8001
 TAIGA_BACK_PORT=18000
 ```
 
