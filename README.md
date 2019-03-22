@@ -280,6 +280,19 @@ TAIGA_BACK_PORT=8001
 TAIGA_BACK_PORT=18000
 ```
 
+### TAIGA_EVENTS_ENABLED
+
+*Default value*:
+
+Enable Taiga events.
+
+Examples:
+```
+TAIGA_EVENTS_ENABLED=1
+TAIGA_EVENTS_ENABLED=True
+TAIGA_EVENTS_ENABLED=
+```
+
 ### TAIGA_EVENTS_HOST
 
 *Default value*: `taigaevents`
@@ -302,16 +315,4 @@ Examples:
 ```
 TAIGA_EVENTS_PORT=8888
 TAIGA_EVENTS_PORT=18888
-```
-
-### RABBIT_PORT_5672_TCP_ADDR
-
-*Default value*:
-
-Enable Taiga events URL.
-
-Examples:
-```
-RABBIT_PORT_5672_TCP_ADDR=1
-RABBIT_PORT_5672_TCP_ADDR=
 ```
