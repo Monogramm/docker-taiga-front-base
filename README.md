@@ -9,21 +9,22 @@
 [![](https://images.microbadger.com/badges/version/monogramm/docker-taiga-front-base.svg)](https://microbadger.com/images/monogramm/docker-taiga-front-base)
 [![](https://images.microbadger.com/badges/image/monogramm/docker-taiga-front-base.svg)](https://microbadger.com/images/monogramm/docker-taiga-front-base)
 
+
 # Docker image for taiga-front
 
 This Docker repository provides the [taiga-front](https://github.com/taigaio/taiga-front) server with a configuration suitable to use with [taiga-back](https://github.com/taigaio/taiga-back).
 
-:construction: **This container is still in development!**
-
 This image was inspired by [ajira86/docker-taiga](https://github.com/ajira86/docker-taiga) which is a fork of [benhutchins/docker-taiga](https://github.com/benhutchins/docker-taiga).
 
 For a more advanced image and full docker-compose example, checkout [Monogramm/docker-taiga](https://github.com/Monogramm/docker-taiga).
+
 
 ## What is Taiga?
 
 Taiga is a project management platform for startups and agile developers & designers who want a simple, beautiful tool that makes work truly enjoyable.
 
 > [taiga.io](https://taiga.io)
+
 
 ## Build Docker image
 
@@ -32,6 +33,32 @@ To generate docker images from the template, execute `update.sh` script.
 Install Docker and then run `docker build -t docker-taiga-front-base images/VARIANT/VERSION` to build the image for the variant and version you need.
 
 You can also build all images by running `update.sh build`.
+
+
+# Adding Features
+If the image does not include the packages you need, you can easily build your own image on top of it.
+Start your derived image with the `FROM` statement and add whatever you like.
+
+```Dockerfile
+FROM monogramm/docker-taiga-front-base:alpine
+
+RUN ...
+
+```
+
+You can also clone this repository and use the [update.sh](update.sh) shell script to generate a new Dockerfile based on your own needs.
+
+For instance, you could build a container based on Dolibarr develop branch by setting the `update.sh` versions like this:
+```bash
+latests=( "master" )
+```
+Then simply call [update.sh](update.sh) script.
+
+```console
+bash update.sh
+```
+Your Dockerfile(s) will be generated in the `images/` folder.
+
 
 ## Auto configuration via environment variables
 
@@ -44,7 +71,7 @@ See [conf.example.json](https://github.com/taigaio/taiga-front/blob/master/conf/
 
 *Default value*: `localhost`
 
-Your service hostname (REQUIRED)
+Your service hostname (REQUIRED). Remember to set it in the backend too.
 
 Examples:
 ```
@@ -56,7 +83,7 @@ TAIGA_HOSTNAME=taiga.company.com
 
 *Default value*: `False`
 
-Activate SSL.
+Activate SSL. Remember to enable it in the backend too.
 
 Examples:
 ```
@@ -68,7 +95,7 @@ TAIGA_SSL=True
 
 *Default value*: `False`
 
-Activate SSL through a reverse proxy. If this is `True`, `TAIGA_SSL` is ignored.
+Activate SSL through a reverse proxy. If this is `True`, `TAIGA_SSL` is ignored. Remember to enable it in the backend too.
 
 Examples:
 ```
@@ -209,7 +236,7 @@ TAIGA_MAX_UPLOAD_SIZE=
 
 *Default value*:
 
-Taiga frontend plugins installed.
+Taiga frontend plugins installed. Remember to install and configure your plugins in the backend too.
 
 Examples:
 ```
@@ -222,7 +249,7 @@ TAIGA_CONTRIB_PLUGINS=
 
 *Default value*:
 
-Taiga frontend importers installed.
+Taiga frontend importers installed. Remember to enable importers in the backend too.
 
 Examples:
 ```
@@ -266,6 +293,7 @@ Examples:
 ```
 TAIGA_BACK_HOST=taigaback
 TAIGA_BACK_HOST=back
+TAIGA_BACK_HOST=taiga_back
 ```
 
 ### TAIGA_BACK_PORT
@@ -284,7 +312,7 @@ TAIGA_BACK_PORT=18000
 
 *Default value*:
 
-Enable Taiga events.
+Enable Taiga events. Remember to enable it in the backend too.
 
 Examples:
 ```
@@ -303,6 +331,7 @@ Examples:
 ```
 TAIGA_EVENTS_HOST=taigaevents
 TAIGA_EVENTS_HOST=events
+TAIGA_EVENTS_HOST=taiga_events
 ```
 
 ### TAIGA_EVENTS_PORT
@@ -313,6 +342,6 @@ Taiga events port for Nginx proxy.
 
 Examples:
 ```
-TAIGA_EVENTS_PORT=8888
+TAIGA_EVENTS_PORT=8443
 TAIGA_EVENTS_PORT=18888
 ```
