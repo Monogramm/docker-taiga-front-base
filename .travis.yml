@@ -11,18 +11,17 @@ branches:
 
 before_script:
   - env | sort
-  - name="taiga-front"
-  - image="monogramm/docker-taiga-front-base:travis-${VERSION}${VARIANT:+-$VARIANT}"
-  - dir="images/${VERSION}/${VARIANT}"
+  - container_name="taiga_front"
 
 script:
-  - docker build -t "$image" "$dir"
+  - docker-compose build
+  - travis_retry docker-compose up -d && docker-compose ps | grep "$container_name"
+  - docker-compose ps
+  - docker-compose logs
 
 after_script:
   - docker images
-  - docker run --name "$name" -d "$image"
-  - docker ps
-  - docker logs "$name"
+  - docker ps -a
 
 notifications:
   email: false
