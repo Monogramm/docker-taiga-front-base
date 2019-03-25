@@ -28,7 +28,7 @@ Taiga is a project management platform for startups and agile developers & desig
 
 ## Supported tags
 
-https://hub.docker.com/r/monogramm/docker-nextcloud/
+https://hub.docker.com/r/monogramm/docker-taiga-front-base/
 
 -	`3.3`, `3.3-alpine` (*3.3/alpine/Dockerfile*)
 -	`3.4`, `3.4-alpine`, `3`, `3-alpine` (*3.4/alpine/Dockerfile*)
