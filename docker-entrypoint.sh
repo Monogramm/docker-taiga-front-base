@@ -190,12 +190,12 @@ fi
 if [ -n "$TAIGA_LOGIN_FORM_TYPE" ]; then
   echo "Updating Taiga Front login form type: $TAIGA_LOGIN_FORM_TYPE"
   sed -i \
-    -e "s|\"loginFormType\": .*,|\"loginFormType\": \"$TAIGA_LOGIN_FORM_TYPE\",|g" \
+    -e "s|\"loginFormType\": \".*\"|\"loginFormType\": \"$TAIGA_LOGIN_FORM_TYPE\"|g" \
     /taiga/conf.json
 else
   echo "Reset Taiga Front login form type"
   sed -i \
-    -e "s|\"loginFormType\": .*,|\"loginFormType\": \"normal\",|g" \
+    -e "s|\"loginFormType\": \".*\"|\"loginFormType\": \"normal\"|g" \
     /taiga/conf.json
 fi
 
