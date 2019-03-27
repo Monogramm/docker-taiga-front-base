@@ -15,7 +15,7 @@ before_script:
 
 script:
   - docker-compose build
-  - travis_retry docker-compose up -d && docker-compose ps | grep "$container_name"
+  - travis_retry docker-compose up -d && sleep 60 && docker-compose ps "$container_name" | grep "Up"
   - docker-compose ps
   - docker-compose logs
 
