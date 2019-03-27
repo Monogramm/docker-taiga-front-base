@@ -64,14 +64,14 @@ fi
 if [ -n "$TAIGA_DEFAULT_LANGUAGE" ]; then
   echo "Updating Taiga Front default language: $TAIGA_DEFAULT_LANGUAGE"
   sed -i \
-    -e "s|\"defaultLanguage\": \".*\",|\"defaultLanguage\": \"$TAIGA_DEFAULT_LANGUAGE\",|g" \
+    -e "s|\"defaultLanguage\": \".*\"|\"defaultLanguage\": \"$TAIGA_DEFAULT_LANGUAGE\"|g" \
     /taiga/conf.json
 fi
 
 if [ -n "$TAIGA_DEFAULT_THEME" ]; then
   echo "Updating Taiga Front default theme: $TAIGA_DEFAULT_THEME"
   sed -i \
-    -e "s|\"defaultTheme\": \".*\",|\"defaultTheme\": \"$TAIGA_DEFAULT_THEME\",|g" \
+    -e "s|\"defaultTheme\": \".*\"|\"defaultTheme\": \"$TAIGA_DEFAULT_THEME\"|g" \
     /taiga/conf.json
 fi
 
@@ -156,12 +156,12 @@ if [ -n "$TAIGA_CONTRIB_PLUGINS" ]; then
     plugins_list="$plugins_list \"/plugins/$plugin/$plugin.json\",";
   done
   sed -i \
-    -e "s|\"contribPlugins\": [.*],|\"contribPlugins\": [${plugins_list::-1}],|g" \
+    -e "s|\"contribPlugins\": [.*]|\"contribPlugins\": [${plugins_list::-1}]|g" \
     /taiga/conf.json
 else
   echo "Reset Taiga Front contribution plugins list"
   sed -i \
-    -e "s|\"contribPlugins\": [.*],|\"contribPlugins\": [],|g" \
+    -e "s|\"contribPlugins\": [.*]|\"contribPlugins\": []|g" \
     /taiga/conf.json
 fi
 
@@ -172,12 +172,12 @@ if [ -n "$TAIGA_IMPORTERS" ]; then
     importers_list="$importers_list \"$importer\",";
   done
   sed -i \
-    -e "s|\"importers\": [.*],|\"importers\": [${importers_list::-1}],|g" \
+    -e "s|\"importers\": [.*]|\"importers\": [${importers_list::-1}]|g" \
     /taiga/conf.json
 else
   echo "Reset Taiga Front importers list"
   sed -i \
-    -e "s|\"importers\": [.*],|\"importers\": [],|g" \
+    -e "s|\"importers\": [.*]|\"importers\": []|g" \
     /taiga/conf.json
 fi
 
