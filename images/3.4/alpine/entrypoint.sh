@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 if [ ! -f /taiga/conf.json ]; then
   echo "Taiga frontend configuration missing!"
