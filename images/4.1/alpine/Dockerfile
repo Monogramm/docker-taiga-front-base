@@ -1,6 +1,6 @@
 FROM nginx:alpine
 
-LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
+LABEL maintainer="Monogramm maintainers <opensource at monogramm dot io>"
 
 # Taiga nginx, back, front and events properties
 ENV TAIGA_VERSION=4.1.1 \

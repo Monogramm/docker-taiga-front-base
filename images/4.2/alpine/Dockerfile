@@ -1,9 +1,9 @@
 FROM nginx:alpine
 
-LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
+LABEL maintainer="Monogramm maintainers <opensource at monogramm dot io>"
 
 # Taiga nginx, back, front and events properties
-ENV TAIGA_VERSION=4.2.3 \
+ENV TAIGA_VERSION=4.2.5 \
     TAIGA_HOSTNAME=localhost \
     TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
