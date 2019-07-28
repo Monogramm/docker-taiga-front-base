@@ -205,6 +205,12 @@ else
 fi
 
 #########################################
+if [ -f /custom_init.sh ]; then
+  log "Executing custom init script..."
+  /custom_init.sh
+fi
+
+#########################################
 ## Taiga NGinx config
 #########################################
 
