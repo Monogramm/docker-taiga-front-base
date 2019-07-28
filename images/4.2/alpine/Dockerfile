@@ -3,7 +3,7 @@ FROM nginx:alpine
 LABEL maintainer="Monogramm maintainers <opensource at monogramm dot io>"
 
 # Build version
-ARG TAIGA_VERSION=4.2.8
+ARG TAIGA_VERSION=4.2.11
 
 VOLUME /taiga
 
