@@ -241,6 +241,17 @@ else
   fi
 fi
 
+# Update proxy pass if backend served with SSL
+if [ "$TAIGA_BACKEND_SSL" = "True" ]; then
+  sed -i \
+    -e "s|http://|https://|g" \
+    /etc/nginx/snippets/api.conf
+else
+  sed -i \
+    -e "s|https://|http://|g" \
+    /etc/nginx/snippets/api.conf
+fi
+
 # Look to see if we should update the backend connection
 if [ -n "$TAIGA_BACK_HOST" ]; then
   log "Updating Taiga Back connection: $TAIGA_BACK_HOST"
