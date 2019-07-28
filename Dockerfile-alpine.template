@@ -43,6 +43,7 @@ RUN set -ex; \
 ENV TAIGA_HOSTNAME=localhost \
     TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
+    TAIGA_BACKEND_SSL=False \
     TAIGA_DEBUG=false \
     TAIGA_DEBUG_INFO=false \
     TAIGA_DEFAULT_LANGUAGE=en \

@@ -205,6 +205,12 @@ else
 fi
 
 #########################################
+if [ -f /custom_init.sh ]; then
+  log "Executing custom init script..."
+  /custom_init.sh
+fi
+
+#########################################
 ## Taiga NGinx config
 #########################################
 
@@ -233,6 +239,17 @@ else
       /etc/nginx/sites-available/taiga.conf \
       /etc/nginx/conf.d/taiga.conf
   fi
+fi
+
+# Update proxy pass if backend served with SSL
+if [ "$TAIGA_BACKEND_SSL" = "True" ]; then
+  sed -i \
+    -e "s|http://|https://|g" \
+    /etc/nginx/snippets/api.conf
+else
+  sed -i \
+    -e "s|https://|http://|g" \
+    /etc/nginx/snippets/api.conf
 fi
 
 # Look to see if we should update the backend connection
