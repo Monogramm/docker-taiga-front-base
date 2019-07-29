@@ -94,7 +94,7 @@ TAIGA_HOSTNAME=taiga.company.com
 
 *Default value*: `False`
 
-Activate SSL. Remember to enable it in the backend too.
+Indicate SSL is enabled. Remember to enable it in the backend too.
 
 Examples:
 ```yml
@@ -106,12 +106,24 @@ TAIGA_SSL=True
 
 *Default value*: `False`
 
-Activate SSL through a reverse proxy. If this is `True`, `TAIGA_SSL` is ignored. Remember to enable it in the backend too.
+Indicate SSL is enabled through a reverse proxy. If this is `True`, `TAIGA_SSL` is ignored. Remember to enable it in the backend too.
 
 Examples:
 ```yml
 TAIGA_SSL_BY_REVERSE_PROXY=False
 TAIGA_SSL_BY_REVERSE_PROXY=True
+```
+
+### TAIGA_BACKEND_SSL
+
+*Default value*: `False`
+
+Indicate SSL is enabled for backend.
+
+Examples:
+```yml
+TAIGA_BACKEND_SSL=False
+TAIGA_BACKEND_SSL=True
 ```
 
 ### TAIGA_DEBUG
