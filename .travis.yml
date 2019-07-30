@@ -11,13 +11,21 @@ branches:
 
 before_script:
   - env | sort
-  - container_name="taiga_front"
 
 script:
-  - docker-compose build
-  - travis_retry docker-compose up -d && sleep 60 && docker-compose ps "$container_name" | grep "Up"
+  # Test containers build
+  - travis_retry docker-compose build
+  # Test containers run
+  - docker-compose up -d && sleep 60
   - docker-compose ps
   - docker-compose logs
+  - docker-compose ps "taiga_front" | grep "Up"
+  # Test containers can be dropped and restarted
+  - docker-compose down
+  - docker-compose up -d && sleep 60
+  - docker-compose ps
+  - docker-compose logs
+  - docker-compose ps "taiga_front" | grep "Up"
 
 after_script:
   - docker images
