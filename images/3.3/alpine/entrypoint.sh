@@ -72,6 +72,22 @@ if [ -n "$TAIGA_DEFAULT_LANGUAGE" ]; then
     /taiga/conf.json
 fi
 
+if [ -n "$TAIGA_THEMES" ]; then
+  log "Updating Taiga Front themes list: $TAIGA_THEMES"
+  themes_list=
+  for theme in $TAIGA_THEMES ; do
+    themes_list="$themes_list\"$theme\", ";
+  done
+  sed -i \
+    -e "s|\"themes\": \[.*\]|\"themes\": [${themes_list::-2}]|g" \
+    /taiga/conf.json
+else
+  log "Reset Taiga Front themes list"
+  sed -i \
+    -e "s|\"themes\": \[.*\]|\"themes\": [\"taiga\", \"material-design\", \"high-contrast\"]|g" \
+    /taiga/conf.json
+fi
+
 if [ -n "$TAIGA_DEFAULT_THEME" ]; then
   log "Updating Taiga Front default theme: $TAIGA_DEFAULT_THEME"
   sed -i \

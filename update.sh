@@ -46,12 +46,13 @@ for latest in "${latests[@]}"; do
 
             template="Dockerfile-${base[$variant]}.template"
             cp "$template" "$dir/Dockerfile"
+            cp "docker-compose.yml" "$dir/docker-compose.yml"
 
             # Replace the variables.
             sed -ri -e '
                 s/%%VARIANT%%/'"$variant"'/g;
                 s/%%VERSION%%/'"$latest"'/g;
-            ' "$dir/Dockerfile"
+            ' "$dir/Dockerfile" "$dir/docker-compose.yml"
 
             # Copy the scripts
             for name in entrypoint.sh; do

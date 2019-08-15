@@ -16,7 +16,7 @@ services:
 
   taiga_back:
     #build: ./
-    image: monogramm/docker-taiga-back-base:${VERSION}-%%VARIANT%%
+    image: monogramm/docker-taiga-back-base:${VERSION}-alpine
     #hostname: taiga.${DOMAIN}
     container_name: taiga_back
     #restart: always
@@ -78,7 +78,7 @@ services:
     # For CI or local modifications
     build: ./
     # For production
-    #image: monogramm/docker-taiga-front-base:${VERSION}-%%VARIANT%%
+    #image: monogramm/docker-taiga-front-base:${VERSION}-alpine
     #hostname: taiga.${DOMAIN}
     container_name: taiga_front
     #restart: always
@@ -106,7 +106,6 @@ services:
       #- TAIGA_HOSTNAME=taiga.${DOMAIN}
       #- TAIGA_SSL=True
       #- TAIGA_SSL_BY_REVERSE_PROXY=True
-      #- TAIGA_BACKEND_SSL=True
       # Frontend settings
       - TAIGA_DEBUG=false
       - TAIGA_DEBUG_INFO=false

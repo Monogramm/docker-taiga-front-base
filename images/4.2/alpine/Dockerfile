@@ -3,7 +3,7 @@ FROM nginx:alpine
 LABEL maintainer="Monogramm maintainers <opensource at monogramm dot io>"
 
 # Build version
-ARG TAIGA_VERSION=4.2.11
+ARG TAIGA_VERSION=4.2.13
 
 VOLUME /taiga
 
@@ -47,6 +47,7 @@ ENV TAIGA_HOSTNAME=localhost \
     TAIGA_DEBUG=false \
     TAIGA_DEBUG_INFO=false \
     TAIGA_DEFAULT_LANGUAGE=en \
+    TAIGA_THEMES= \
     TAIGA_DEFAULT_THEME=taiga \
     TAIGA_PUBLIC_REGISTER_ENABLED=false \
     TAIGA_FEEDBACK_ENABLED=false \
