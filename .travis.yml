@@ -12,12 +12,24 @@ branches:
 before_script:
   - env | sort
   - container_name="taiga_front"
+  - dir="images/${VERSION}/${VARIANT}"
+  - file="docker-compose.yml"
 
 script:
-  - docker-compose build
-  - travis_retry docker-compose up -d && sleep 60 && docker-compose ps "$container_name" | grep "Up"
-  - docker-compose ps
-  - docker-compose logs
+  - cd "$dir"
+  # Test containers build
+  - travis_retry docker-compose -f ${file} build
+  # Test containers run
+  - docker-compose -f ${file} up -d && sleep 60
+  - docker-compose -f ${file} ps
+  - docker-compose -f ${file} logs
+  - docker-compose -f ${file} ps "$container_name" | grep "Up"
+  # Test containers can be dropped and restarted
+  - docker-compose -f ${file} down
+  - docker-compose -f ${file} up -d && sleep 60
+  - docker-compose -f ${file} ps
+  - docker-compose -f ${file} logs
+  - docker-compose -f ${file} ps "$container_name" | grep "Up"
 
 after_script:
   - docker images
