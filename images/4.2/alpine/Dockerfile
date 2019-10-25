@@ -2,9 +2,6 @@ FROM nginx:alpine
 
 LABEL maintainer="Monogramm maintainers <opensource at monogramm dot io>"
 
-# Build version
-ARG TAIGA_VERSION=4.2.13
-
 VOLUME /taiga
 
 COPY entrypoint.sh /
@@ -12,6 +9,9 @@ COPY conf/nginx/nginx.conf          /etc/
 COPY conf/nginx/sites-available/*   /etc/nginx/sites-available/
 COPY conf/nginx/snippets/*          /etc/nginx/snippets/
 COPY conf/taiga/conf.json /taiga/
+
+# Build version
+ARG TAIGA_VERSION=4.2.14
 
 # Get Taiga
 ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
