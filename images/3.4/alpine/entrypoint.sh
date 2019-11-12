@@ -11,6 +11,14 @@ if [ ! -f /taiga/conf.json ]; then
 fi
 
 #########################################
+## Taiga Front custom config
+#########################################
+if [ -f /custom_init.sh ]; then
+  log "Executing custom init script..."
+  /custom_init.sh
+fi
+
+#########################################
 ## Taiga Front config
 #########################################
 
@@ -218,12 +226,6 @@ else
   sed -i \
     -e "s|\"loginFormType\": \".*\"|\"loginFormType\": \"normal\"|g" \
     /taiga/conf.json
-fi
-
-#########################################
-if [ -f /custom_init.sh ]; then
-  log "Executing custom init script..."
-  /custom_init.sh
 fi
 
 #########################################
