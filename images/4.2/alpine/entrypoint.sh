@@ -14,8 +14,8 @@ fi
 ## Taiga Front custom config
 #########################################
 if [ -f /custom_init.sh ]; then
-  log "Executing custom init script..."
-  /custom_init.sh
+  log "Importing custom init script..."
+  . /custom_init.sh
 fi
 
 #########################################
