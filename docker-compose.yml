@@ -1,4 +1,4 @@
-version: '2'
+version: '2.2'
 
 services:
   taigadb:
@@ -6,7 +6,7 @@ services:
     container_name: taigadb
     #restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "taiga"]
     volumes:
@@ -16,14 +16,31 @@ services:
       - POSTGRES_USER=taiga
       - POSTGRES_PASSWORD=taiga
 
+  # Simple mail service for testing
+  taiga_mailer:
+    image: sj26/mailcatcher:latest
+    hostname: taiga_mailer
+    container_name: taiga_mailer
+    restart: always
+    expose:
+      - 1025
+    ports:
+      - 1080:1080
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
   taiga_back:
     #build: ./
     image: monogramm/docker-taiga-back-base:${VERSION}-%%VARIANT%%
     #hostname: taiga.${DOMAIN}
     container_name: taiga_back
     #restart: always
+    healthcheck:
+      test: CMD curl --fail http://127.0.0.1:8001/api/v1/ || exit 1
     depends_on:
-      - taigadb
+      taigadb:
+        condition: service_healthy
     ports:
       - "8001:8001"
     volumes:
@@ -52,13 +69,13 @@ services:
       # when the db comes up from docker, it is usually too quick
       - TAIGA_SLEEP=5
       # To use an external SMTP for emails, fill in these values:
-      - TAIGA_ENABLE_EMAIL=False
-      #- TAIGA_EMAIL_FROM=taiga@${TAIGA_EMAIL_DOMAIN}
-      #- TAIGA_EMAIL_USE_TLS=True
-      #- TAIGA_EMAIL_HOST=smtp.${TAIGA_EMAIL_DOMAIN}
-      #- TAIGA_EMAIL_PORT=587
-      #- TAIGA_EMAIL_USER=${TAIGA_SMTP_USER}
-      #- TAIGA_EMAIL_PASS=${TAIGA_SMTP_PWD}
+      - TAIGA_ENABLE_EMAIL=True
+      - TAIGA_EMAIL_FROM=taiga@${TAIGA_EMAIL_DOMAIN}
+      - TAIGA_EMAIL_USE_TLS=False
+      - TAIGA_EMAIL_HOST=mailcatcher
+      - TAIGA_EMAIL_PORT=1025
+      - TAIGA_EMAIL_USER=
+      - TAIGA_EMAIL_PASS=
       # Backend settings
       - TAIGA_DEBUG=False
       - TAIGA_PUBLIC_REGISTER_ENABLED=False
@@ -84,11 +101,16 @@ services:
     #hostname: taiga.${DOMAIN}
     container_name: taiga_front
     #restart: always
+    healthcheck:
+      test: CMD curl --fail http://localhost:80/conf.json && curl --fail http://localhost && curl --fail http://localhost/api/v1/ || exit 1
+      interval: 60s
+      timeout: 10s
+      #start_period: 5s
+      retries: 4
     depends_on:
       - taiga_back
       # To disable taiga-events, comment the following lines:
       - taiga_events
-      - taiga_rabbit
       # To enable async mode, uncomment the following lines:
       #- taiga_redis
     ports:
@@ -163,6 +185,7 @@ services:
     environment:
       #- RABBIT_USER=${TAIGA_RABBIT_USER}
       #- RABBIT_PASSWORD=${TAIGA_RABBIT_PASSWORD}
+      - RABBIT_VHOST=/
       - RABBIT_HOST=taiga_rabbit
       - RABBIT_PORT=5672
       #- TAIGA_EVENTS_SECRET=${TAIGA_SECRET}
