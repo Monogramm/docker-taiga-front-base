@@ -39,8 +39,11 @@ services:
     healthcheck:
       test: CMD curl --fail http://127.0.0.1:8001/api/v1/ || exit 1
     depends_on:
-      taigadb:
+      - taigadb:
         condition: service_healthy
+      # To enable async mode, uncomment the following lines:
+      #- taiga_redis:
+      #  condition: service_started
     ports:
       - "8001:8001"
     volumes:
@@ -113,9 +116,6 @@ services:
       # To disable taiga-events, comment the following lines:
       - taiga_events:
         condition: service_started
-      # To enable async mode, uncomment the following lines:
-      #- taiga_redis:
-      #  condition: service_started
     ports:
       - "80:80"
       - "443:443"
@@ -199,6 +199,8 @@ services:
 #    image: redis:4.0-alpine
 #    container_name: taiga_redis
 #    restart: always
+#    healthcheck:
+#      test: ["CMD", "redis-cli", "ping"]
 #    ports:
 #      - 6379:6379
 #    volumes:
