@@ -1,14 +1,9 @@
-
-[uri_license]: http://www.gnu.org/licenses/agpl.html
-[uri_license_image]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
-
 [![License: AGPL v3][uri_license_image]][uri_license]
 [![Build Status](https://travis-ci.org/Monogramm/docker-taiga-front-base.svg)](https://travis-ci.org/Monogramm/docker-taiga-front-base)
 [![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-taiga-front-base.svg)](https://hub.docker.com/r/monogramm/docker-taiga-front-base/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-taiga-front-base.svg)](https://hub.docker.com/r/monogramm/docker-taiga-front-base/)
 [![](https://images.microbadger.com/badges/version/monogramm/docker-taiga-front-base.svg)](https://microbadger.com/images/monogramm/docker-taiga-front-base)
 [![](https://images.microbadger.com/badges/image/monogramm/docker-taiga-front-base.svg)](https://microbadger.com/images/monogramm/docker-taiga-front-base)
-
 
 # Docker image for taiga-front
 
@@ -18,23 +13,20 @@ This image was inspired by [ajira86/docker-taiga](https://github.com/ajira86/doc
 
 For a more advanced image and full docker-compose example, checkout [Monogramm/docker-taiga](https://github.com/Monogramm/docker-taiga).
 
-
-## What is Taiga?
+## What is Taiga
 
 Taiga is a project management platform for startups and agile developers & designers who want a simple, beautiful tool that makes work truly enjoyable.
 
 > [taiga.io](https://taiga.io)
 
-
 ## Supported tags
 
-https://hub.docker.com/r/monogramm/docker-taiga-front-base/
+<https://hub.docker.com/r/monogramm/docker-taiga-front-base/>
 
--	`4.0`, `4.0-alpine` (*4.0/alpine/Dockerfile*)
--	`4.1`, `4.1-alpine` (*4.1/alpine/Dockerfile*)
--	`4.2-alpine`, `4.2`, `4-alpine`, `4` (*4.2/alpine/Dockerfile*)
--	`5.0-alpine`, `5.0`, `5-alpine`, `5`, `alpine`, `latest` (*5.0/alpine/Dockerfile*)
-
+-   `4.0`, `4.0-alpine` (_4.0/alpine/Dockerfile_)
+-   `4.1`, `4.1-alpine` (_4.1/alpine/Dockerfile_)
+-   `4.2-alpine`, `4.2`, `4-alpine`, `4` (_4.2/alpine/Dockerfile_)
+-   `5.0-alpine`, `5.0`, `5-alpine`, `5`, `alpine`, `latest` (_5.0/alpine/Dockerfile_)
 
 ## Build Docker image
 
@@ -44,8 +36,8 @@ Install Docker and then run `docker build -t docker-taiga-front-base images/VARI
 
 You can also build all images by running `update.sh build`.
 
+## Adding Features
 
-# Adding Features
 If the image does not include the packages you need, you can easily build your own image on top of it.
 Start your derived image with the `FROM` statement and add whatever you like.
 
@@ -59,16 +51,18 @@ RUN ...
 You can also clone this repository and use the [update.sh](update.sh) shell script to generate a new Dockerfile based on your own needs.
 
 For instance, you could build a container based on Dolibarr develop branch by setting the `update.sh` versions like this:
+
 ```bash
 latests=( "master" )
 ```
+
 Then simply call [update.sh](update.sh) script.
 
 ```console
 bash update.sh
 ```
-Your Dockerfile(s) will be generated in the `images/` folder.
 
+Your Dockerfile(s) will be generated in the `images/` folder.
 
 ## Auto configuration via environment variables
 
@@ -76,14 +70,14 @@ The Taiga image supports auto configuration via environment variables. You can p
 
 See [conf.example.json](https://github.com/taigaio/taiga-front/blob/master/conf/conf.example.json) for more details on configuration.
 
-
 ### TAIGA_HOSTNAME
 
-*Default value*: `localhost`
+_Default value_: `localhost`
 
 Your service hostname (REQUIRED). Remember to set it in the backend too.
 
 Examples:
+
 ```yml
 TAIGA_HOSTNAME=localhost
 TAIGA_HOSTNAME=taiga.company.com
@@ -91,11 +85,12 @@ TAIGA_HOSTNAME=taiga.company.com
 
 ### TAIGA_SSL
 
-*Default value*: `False`
+_Default value_: `False`
 
 Indicate SSL is enabled. Remember to enable it in the backend too.
 
 Examples:
+
 ```yml
 TAIGA_SSL=False
 TAIGA_SSL=True
@@ -103,11 +98,12 @@ TAIGA_SSL=True
 
 ### TAIGA_SSL_BY_REVERSE_PROXY
 
-*Default value*: `False`
+_Default value_: `False`
 
 Indicate SSL is enabled through a reverse proxy. If this is `True`, `TAIGA_SSL` is ignored. Remember to enable it in the backend too.
 
 Examples:
+
 ```yml
 TAIGA_SSL_BY_REVERSE_PROXY=False
 TAIGA_SSL_BY_REVERSE_PROXY=True
@@ -115,11 +111,12 @@ TAIGA_SSL_BY_REVERSE_PROXY=True
 
 ### TAIGA_BACKEND_SSL
 
-*Default value*: `False`
+_Default value_: `False`
 
 Indicate SSL is enabled for backend.
 
 Examples:
+
 ```yml
 TAIGA_BACKEND_SSL=False
 TAIGA_BACKEND_SSL=True
@@ -127,11 +124,12 @@ TAIGA_BACKEND_SSL=True
 
 ### TAIGA_DEBUG
 
-*Default value*: `false`
+_Default value_: `false`
 
 Enable Taiga frontend debug mode.
 
 Examples:
+
 ```yml
 TAIGA_DEBUG=false
 TAIGA_DEBUG=true
@@ -140,11 +138,12 @@ TAIGA_DEBUG=
 
 ### TAIGA_DEBUG_INFO
 
-*Default value*: `false`
+_Default value_: `false`
 
 Enable Taiga frontend debug information.
 
 Examples:
+
 ```yml
 TAIGA_DEBUG_INFO=false
 TAIGA_DEBUG_INFO=true
@@ -153,11 +152,12 @@ TAIGA_DEBUG_INFO=
 
 ### TAIGA_DEFAULT_LANGUAGE
 
-*Default value*: `en`
+_Default value_: `en`
 
 Taiga frontend default language.
 
 Examples:
+
 ```yml
 TAIGA_DEBUG_INFO=en
 TAIGA_DEBUG_INFO=fr
@@ -165,11 +165,12 @@ TAIGA_DEBUG_INFO=fr
 
 ### TAIGA_DEFAULT_THEME
 
-*Default value*: `taiga`
+_Default value_: `taiga`
 
 Taiga frontend default theme.
 
 Examples:
+
 ```yml
 TAIGA_DEBUG_INFO=taiga
 TAIGA_DEBUG_INFO=material-design
@@ -178,11 +179,12 @@ TAIGA_DEBUG_INFO=high-contrast
 
 ### TAIGA_PUBLIC_REGISTER_ENABLED
 
-*Default value*: `false`
+_Default value_: `false`
 
 Enable Taiga frontend registration.
 
 Examples:
+
 ```yml
 TAIGA_PUBLIC_REGISTER_ENABLED=false
 TAIGA_PUBLIC_REGISTER_ENABLED=true
@@ -191,11 +193,12 @@ TAIGA_PUBLIC_REGISTER_ENABLED=
 
 ### TAIGA_SUPPORT_URL
 
-*Default value*: `https://tree.taiga.io/support`
+_Default value_: `https://tree.taiga.io/support`
 
 Taiga frontend support URL.
 
 Examples:
+
 ```yml
 TAIGA_SUPPORT_URL=https://tree.taiga.io/support
 TAIGA_SUPPORT_URL=https://taiga.company.com/support
@@ -204,11 +207,12 @@ TAIGA_SUPPORT_URL=
 
 ### TAIGA_PRIVACY_POLICY_URL
 
-*Default value*:
+_Default value_:
 
 Taiga frontend privacy policy URL.
 
 Examples:
+
 ```yml
 TAIGA_PRIVACY_POLICY_URL=https://taiga.io/privacy-policy.html
 TAIGA_PRIVACY_POLICY_URL=https://taiga.company.com/privacy-policy
@@ -217,11 +221,12 @@ TAIGA_PRIVACY_POLICY_URL=
 
 ### TAIGA_TOS_URL
 
-*Default value*:
+_Default value_:
 
 Taiga frontend terms of services URL.
 
 Examples:
+
 ```yml
 TAIGA_TOS_URL=https://taiga.io/terms-of-service.html
 TAIGA_TOS_URL=https://taiga.company.com/terms-of-service
@@ -230,11 +235,12 @@ TAIGA_TOS_URL=
 
 ### TAIGA_GDPR_URL
 
-*Default value*:
+_Default value_:
 
 Taiga frontend GDPR compliance URL.
 
 Examples:
+
 ```yml
 TAIGA_GDPR_URL=https://taiga.io/gdpr-compliance.html
 TAIGA_GDPR_URL=https://taiga.company.com/gdpr-compliance
@@ -243,11 +249,12 @@ TAIGA_GDPR_URL=
 
 ### TAIGA_MAX_UPLOAD_SIZE
 
-*Default value*: `104857600` (100 Mo)
+_Default value_: `104857600` (100 Mo)
 
 Taiga frontend max file upload size.
 
 Examples:
+
 ```yml
 TAIGA_MAX_UPLOAD_SIZE=104857600
 TAIGA_MAX_UPLOAD_SIZE=20480
@@ -256,11 +263,12 @@ TAIGA_MAX_UPLOAD_SIZE=
 
 ### TAIGA_CONTRIB_PLUGINS
 
-*Default value*:
+_Default value_:
 
 Taiga frontend plugins installed. Remember to install and configure your plugins in the backend too.
 
 Examples:
+
 ```yml
 TAIGA_CONTRIB_PLUGINS=slack
 TAIGA_CONTRIB_PLUGINS='slack call-to-action cookie-warning'
@@ -269,11 +277,12 @@ TAIGA_CONTRIB_PLUGINS=
 
 ### TAIGA_IMPORTERS
 
-*Default value*:
+_Default value_:
 
 Taiga frontend importers installed. Remember to enable importers in the backend too.
 
 Examples:
+
 ```yml
 TAIGA_IMPORTERS=github
 TAIGA_IMPORTERS='github jira trello asana'
@@ -282,11 +291,12 @@ TAIGA_IMPORTERS=
 
 ### TAIGA_GRAVATAR
 
-*Default value*: `true`
+_Default value_: `true`
 
 Enable Taiga Gravatar usage for usage profile pictures.
 
 Examples:
+
 ```yml
 TAIGA_GRAVATAR=false
 TAIGA_GRAVATAR=true
@@ -295,11 +305,12 @@ TAIGA_GRAVATAR=
 
 ### TAIGA_LOGIN_FORM_TYPE
 
-*Default value*: `normal`
+_Default value_: `normal`
 
 Taiga frontend login form type.
 
 Examples:
+
 ```yml
 TAIGA_LOGIN_FORM_TYPE=normal
 TAIGA_LOGIN_FORM_TYPE=
@@ -307,11 +318,12 @@ TAIGA_LOGIN_FORM_TYPE=
 
 ### TAIGA_BACK_HOST
 
-*Default value*: `taigaback`
+_Default value_: `taigaback`
 
 Taiga backend host for Nginx proxy.
 
 Examples:
+
 ```yml
 TAIGA_BACK_HOST=taigaback
 TAIGA_BACK_HOST=back
@@ -320,11 +332,12 @@ TAIGA_BACK_HOST=taiga_back
 
 ### TAIGA_BACK_PORT
 
-*Default value*: `8001`
+_Default value_: `8001`
 
 Taiga backend port for Nginx proxy.
 
 Examples:
+
 ```yml
 TAIGA_BACK_PORT=8001
 TAIGA_BACK_PORT=18000
@@ -332,11 +345,12 @@ TAIGA_BACK_PORT=18000
 
 ### TAIGA_EVENTS_ENABLED
 
-*Default value*:
+_Default value_:
 
 Enable Taiga events. Remember to enable it in the backend too.
 
 Examples:
+
 ```yml
 TAIGA_EVENTS_ENABLED=1
 TAIGA_EVENTS_ENABLED=True
@@ -345,11 +359,12 @@ TAIGA_EVENTS_ENABLED=
 
 ### TAIGA_EVENTS_HOST
 
-*Default value*: `taigaevents`
+_Default value_: `taigaevents`
 
 Taiga events host for Nginx proxy.
 
 Examples:
+
 ```yml
 TAIGA_EVENTS_HOST=taigaevents
 TAIGA_EVENTS_HOST=events
@@ -358,12 +373,20 @@ TAIGA_EVENTS_HOST=taiga_events
 
 ### TAIGA_EVENTS_PORT
 
-*Default value*: `8888`
+_Default value_: `8888`
 
 Taiga events port for Nginx proxy.
 
 Examples:
+
 ```yml
 TAIGA_EVENTS_PORT=8443
 TAIGA_EVENTS_PORT=18888
 ```
+
+---
+
+[uri_license]: http://www.gnu.org/licenses/agpl.html
+
+[uri_license_image]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
+
