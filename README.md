@@ -30,8 +30,6 @@ Taiga is a project management platform for startups and agile developers & desig
 
 https://hub.docker.com/r/monogramm/docker-taiga-front-base/
 
--	`3.3`, `3.3-alpine` (*3.3/alpine/Dockerfile*)
--	`3.4`, `3.4-alpine`, `3`, `3-alpine` (*3.4/alpine/Dockerfile*)
 -	`4.0`, `4.0-alpine` (*4.0/alpine/Dockerfile*)
 -	`4.1`, `4.1-alpine` (*4.1/alpine/Dockerfile*)
 -	`4.2-alpine`, `4.2`, `4-alpine`, `4` (*4.2/alpine/Dockerfile*)
