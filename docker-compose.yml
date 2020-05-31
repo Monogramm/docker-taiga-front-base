@@ -178,11 +178,11 @@ services:
     image: monogramm/docker-taiga-events:alpine
     container_name: taiga_events
     #restart: always
-    links:
-      - taiga_rabbit
     depends_on:
       taiga_rabbit:
         condition: service_healthy
+    links:
+      - taiga_rabbit
     ports:
       - "8888:8888"
     environment:
