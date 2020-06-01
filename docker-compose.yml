@@ -41,6 +41,9 @@ services:
     depends_on:
       taigadb:
         condition: service_healthy
+      # To enable async mode, uncomment the following lines:
+      #taiga_redis:
+      #  condition: service_started
     ports:
       - "8001:8001"
     volumes:
@@ -108,11 +111,11 @@ services:
       #start_period: 5s
       retries: 4
     depends_on:
-      - taiga_back
+      taiga_back:
+        condition: service_started
       # To disable taiga-events, comment the following lines:
-      - taiga_events
-      # To enable async mode, uncomment the following lines:
-      #- taiga_redis
+      taiga_events:
+        condition: service_started
     ports:
       - "80:80"
       - "443:443"
@@ -175,11 +178,11 @@ services:
     image: monogramm/docker-taiga-events:alpine
     container_name: taiga_events
     #restart: always
-    links:
-      - taiga_rabbit
     depends_on:
       taiga_rabbit:
         condition: service_healthy
+    links:
+      - taiga_rabbit
     ports:
       - "8888:8888"
     environment:
@@ -196,6 +199,8 @@ services:
 #    image: redis:4.0-alpine
 #    container_name: taiga_redis
 #    restart: always
+#    healthcheck:
+#      test: ["CMD", "redis-cli", "ping"]
 #    ports:
 #      - 6379:6379
 #    volumes:
