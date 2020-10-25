@@ -11,7 +11,7 @@ COPY conf/nginx/snippets/*          /etc/nginx/snippets/
 COPY conf/taiga/conf.json /taiga/
 
 # Build version
-ARG TAIGA_VERSION=4.0.4
+ARG TAIGA_VERSION=5.5.6
 
 # Get Taiga
 ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}-stable.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}-stable.tar.gz
