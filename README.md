@@ -26,7 +26,8 @@ Taiga is a project management platform for startups and agile developers & desig
 -   `4.0`, `4.0-alpine` (_4.0/alpine/Dockerfile_)
 -   `4.1`, `4.1-alpine` (_4.1/alpine/Dockerfile_)
 -   `4.2-alpine`, `4.2`, `4-alpine`, `4` (_4.2/alpine/Dockerfile_)
--   `5.0-alpine`, `5.0`, `5-alpine`, `5`, `alpine`, `latest` (_5.0/alpine/Dockerfile_)
+-   `5.0-alpine`, `5.0` (_5.0/alpine/Dockerfile_)
+-   `5.5-alpine`, `5.5`, `5-alpine`, `5`, `alpine`, `latest` (_5.5/alpine/Dockerfile_)
 
 ## Build Docker image
 
