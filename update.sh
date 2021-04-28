@@ -68,7 +68,7 @@ for latest in "${latests[@]}"; do
             cp "template/$template" "$dir/Dockerfile"
 
             # Copy the scripts
-            for name in entrypoint.sh; do
+            for name in entrypoint.sh .env docker-compose.test.yml .dockerignore; do
                 cp "template/$name" "$dir/$name"
                 chmod 755 "$dir/$name"
             done
@@ -76,22 +76,20 @@ for latest in "${latests[@]}"; do
             # Copy the configuration
             cp -r "template/conf" "$dir"
 
-            # DockerHub hooks
-            #cp -r "template/hooks" "$dir/"
-            #cp -r "template/test" "$dir/"
+            cp -r "template/hooks" "$dir/"
+            cp -r "template/test" "$dir/"
 
             # Replace the variables.
             sed -ri -e '
                 s/%%VERSION_SUFFIX%%/'"${version_suffixes[$major]}"'/g;
                 s/%%VARIANT%%/'"$variant"'/g;
                 s/%%VERSION%%/'"$latest"'/g;
-            ' "$dir/Dockerfile"
+            ' "$dir/Dockerfile" "$dir/docker-compose.test.yml"
 
-            # DockerHub hooks
-            #sed -ri -e '
-            #    s|DOCKER_TAG=.*|DOCKER_TAG='"$version"'|g;
-            #    s|DOCKER_REPO=.*|DOCKER_REPO='"$dockerRepo"'|g;
-            #' "$dir/hooks/run"
+            sed -ri -e '
+                s|DOCKER_TAG=.*|DOCKER_TAG='"$version"'|g;
+                s|DOCKER_REPO=.*|DOCKER_REPO='"$dockerRepo"'|g;
+            ' "$dir/hooks/run"
 
             # Create a list of "alias" tags for DockerHub post_push
             tagVariant=${dockerVariant[$variant]}
@@ -143,7 +141,7 @@ sed -e "s|<!-- >Docker Tags -->|<!-- >Docker Tags -->\n$readmeTags\n|g" README.m
 rm README.md.tmp
 
 # update .github workflows
-#sed -i -e "s|version: \[.*\]|version: [${githubEnv}]|g" .github/workflows/hooks.yml
+sed -i -e "s|version: \[.*\]|version: [${githubEnv}]|g" .github/workflows/hooks.yml
 
 # update .travis.yml
 travis="$(awk -v 'RS=\n\n' '$1 == "env:" && $2 == "#" && $3 == "Environments" { $0 = "env: # Environments'"$travisEnv"'" } { printf "%s%s", $0, RS }' .travis.yml)"
