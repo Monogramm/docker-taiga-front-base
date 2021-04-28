@@ -84,6 +84,7 @@ for latest in "${latests[@]}"; do
                 s/%%VERSION_SUFFIX%%/'"${version_suffixes[$major]}"'/g;
                 s/%%VARIANT%%/'"$variant"'/g;
                 s/%%VERSION%%/'"$latest"'/g;
+                s/%%MAJOR_VERSION%%/'"$version"'/g;
             ' "$dir/Dockerfile" "$dir/docker-compose.test.yml"
 
             sed -ri -e '
