@@ -167,6 +167,21 @@ TAIGA_DEBUG_INFO=en
 TAIGA_DEBUG_INFO=fr
 ```
 
+### TAIGA_THEMES
+
+_Default value_:
+
+Taiga frontend themes installed.
+
+Examples:
+
+```yml
+TAIGA_THEMES=
+TAIGA_THEMES=taiga
+TAIGA_THEMES='taiga material-design high-contrast'
+TAIGA_THEMES='taiga legacy material-design high-contrast'
+```
+
 ### TAIGA_DEFAULT_THEME
 
 _Default value_: `taiga`
@@ -176,9 +191,9 @@ Taiga frontend default theme.
 Examples:
 
 ```yml
-TAIGA_DEBUG_INFO=taiga
-TAIGA_DEBUG_INFO=material-design
-TAIGA_DEBUG_INFO=high-contrast
+TAIGA_DEFAULT_THEME=taiga
+TAIGA_DEFAULT_THEME=material-design
+TAIGA_DEFAULT_THEME=high-contrast
 ```
 
 ### TAIGA_PUBLIC_REGISTER_ENABLED
@@ -283,7 +298,7 @@ TAIGA_CONTRIB_PLUGINS=
 
 _Default value_:
 
-Taiga frontend importers installed. Remember to enable importers in the backend too.
+Taiga frontend importers installed (only for Taiga < 6.0). Remember to enable importers in the backend too.
 
 Examples:
 
@@ -291,6 +306,70 @@ Examples:
 TAIGA_IMPORTERS=github
 TAIGA_IMPORTERS='github jira trello asana'
 TAIGA_IMPORTERS=
+```
+
+### TAIGA_IMPORTER_GITHUB_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [GitHub](https://github.com) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_GITHUB_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_GITHUB_ENABLED=true
+```
+
+### TAIGA_IMPORTER_TRELLO_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [Trello](https://trello.com/) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_TRELLO_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_TRELLO_ENABLED=true
+```
+
+### TAIGA_IMPORTER_JIRA_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [JIRA](https://www.atlassian.com/software/jira) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_JIRA_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_JIRA_ENABLED=true
+```
+
+### TAIGA_IMPORTER_ASANA_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [Asana](https://asana.com) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_ASANA_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_ASANA_ENABLED=true
 ```
 
 ### TAIGA_GRAVATAR

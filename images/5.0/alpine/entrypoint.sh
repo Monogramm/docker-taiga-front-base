@@ -92,7 +92,7 @@ if [ -n "$TAIGA_THEMES" ]; then
 else
   log "Reset Taiga Front themes list"
   sed -i \
-    -e "s|\"themes\": \[.*\]|\"themes\": [\"taiga\", \"material-design\", \"high-contrast\"]|g" \
+    -e "s|\"themes\": \[.*\]|\"themes\": [\"taiga\"]|g" \
     /taiga/conf.json
 fi
 
@@ -206,6 +206,34 @@ else
   log "Reset Taiga Front importers list"
   sed -i \
     -e "s|\"importers\": [.*]|\"importers\": []|g" \
+    /taiga/conf.json
+fi
+
+if [ -n "$TAIGA_IMPORTER_GITHUB_ENABLED" ]; then
+  log "Updating Taiga Front GitHub importer status: $TAIGA_IMPORTER_GITHUB_ENABLED"
+  sed -i \
+    -e "s|\"enableGithubImporter\": .*,|\"enableGithubImporter\": $TAIGA_IMPORTER_GITHUB_ENABLED,|g" \
+    /taiga/conf.json
+fi
+
+if [ -n "$TAIGA_IMPORTER_JIRA_ENABLED" ]; then
+  log "Updating Taiga Front Jira importer status: $TAIGA_IMPORTER_JIRA_ENABLED"
+  sed -i \
+    -e "s|\"enableJiraImporter\": .*,|\"enableJiraImporter\": $TAIGA_IMPORTER_JIRA_ENABLED,|g" \
+    /taiga/conf.json
+fi
+
+if [ -n "$TAIGA_IMPORTER_TRELLO_ENABLED" ]; then
+  log "Updating Taiga Front Trello importer status: $TAIGA_IMPORTER_TRELLO_ENABLED"
+  sed -i \
+    -e "s|\"enableTrelloImporter\": .*,|\"enableTrelloImporter\": $TAIGA_IMPORTER_TRELLO_ENABLED,|g" \
+    /taiga/conf.json
+fi
+
+if [ -n "$TAIGA_IMPORTER_ASANA_ENABLED" ]; then
+  log "Updating Taiga Front Asana importer status: $TAIGA_IMPORTER_ASANA_ENABLED"
+  sed -i \
+    -e "s|\"enableAsanaImporter\": .*,|\"enableAsanaImporter\": $TAIGA_IMPORTER_ASANA_ENABLED,|g" \
     /taiga/conf.json
 fi
 
