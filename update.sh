@@ -69,8 +69,8 @@ for latest in "${latests[@]}"; do
             cp -r "template/conf" "$dir"
 
             # DockerHub hooks
-            cp -r "template/hooks" "$dir/"
-            cp -r "template/test" "$dir/"
+            #cp -r "template/hooks" "$dir/"
+            #cp -r "template/test" "$dir/"
 
             # Replace the variables.
             sed -ri -e '
@@ -79,10 +79,10 @@ for latest in "${latests[@]}"; do
             ' "$dir/Dockerfile"
 
             # DockerHub hooks
-            sed -ri -e '
-                s|DOCKER_TAG=.*|DOCKER_TAG='"$version"'|g;
-                s|DOCKER_REPO=.*|DOCKER_REPO='"$dockerRepo"'|g;
-            ' "$dir/hooks/run"
+            #sed -ri -e '
+            #    s|DOCKER_TAG=.*|DOCKER_TAG='"$version"'|g;
+            #    s|DOCKER_REPO=.*|DOCKER_REPO='"$dockerRepo"'|g;
+            #' "$dir/hooks/run"
 
             # Create a list of "alias" tags for DockerHub post_push
             tagVariant=${dockerVariant[$variant]}
