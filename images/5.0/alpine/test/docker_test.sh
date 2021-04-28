@@ -2,17 +2,21 @@
 
 set -e
 
+log() {
+    echo "[$0] [$(date +%Y-%m-%dT%H:%M:%S)] $*"
+}
+
 ################################################################################
 # Testing docker containers
 
-echo "Waiting to ensure everything is fully ready for the tests..."
+log "Waiting to ensure everything is fully ready for the tests..."
 sleep 60
 
-echo "Checking main containers are reachable..."
+log "Checking main containers are reachable..."
 if ! ping -c 10 -q "${DOCKER_TEST_CONTAINER}" ; then
-    echo 'Main container is not responding!'
+    log 'Main container is not responding!'
     # TODO Display logs to help bug fixing
-    #echo 'Check the following logs for details:'
+    #log 'Check the following logs for details:'
     #tail -n 100 logs/*.log
     exit 2
 fi
@@ -20,7 +24,7 @@ fi
 
 ################################################################################
 # Success
-echo 'Docker tests successful'
+log 'Docker tests successful'
 
 
 ################################################################################
@@ -47,6 +51,6 @@ fi
 
 ################################################################################
 # Success
-echo "Docker app '${DOCKER_TEST_CONTAINER}' tests finished"
-echo 'Check the CI reports and logs for details.'
+log "Docker app '${DOCKER_TEST_CONTAINER}' tests finished"
+log 'Check the CI reports and logs for details.'
 exit 0
