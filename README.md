@@ -23,9 +23,14 @@ Taiga is a project management platform for startups and agile developers & desig
 
 <https://hub.docker.com/r/monogramm/docker-taiga-front-base/>
 
--   `4.2-alpine`, `4.2`, `4-alpine`, `4` (_4.2/alpine/Dockerfile_)
--   `5.0-alpine`, `5.0` (_5.0/alpine/Dockerfile_)
--   `5.5-alpine`, `5.5`, `5-alpine`, `5`, `alpine`, `latest` (_5.5/alpine/Dockerfile_)
+<!-- >Docker Tags -->
+
+-   6.0.10-alpine 6.0-alpine alpine 6.0.10 6.0 latest  (`images/6.0/alpine/Dockerfile`)
+-   5.5.10-alpine 5.5-alpine 5.5.10 5.5  (`images/5.5/alpine/Dockerfile`)
+-   5.0.15-alpine 5.0-alpine 5.0.15 5.0  (`images/5.0/alpine/Dockerfile`)
+-   4.2.14-alpine 4.2-alpine 4.2.14 4.2  (`images/4.2/alpine/Dockerfile`)
+
+<!-- <Docker Tags -->
 
 ## Build Docker image
 
@@ -162,6 +167,21 @@ TAIGA_DEBUG_INFO=en
 TAIGA_DEBUG_INFO=fr
 ```
 
+### TAIGA_THEMES
+
+_Default value_:
+
+Taiga frontend themes installed.
+
+Examples:
+
+```yml
+TAIGA_THEMES=
+TAIGA_THEMES=taiga
+TAIGA_THEMES='taiga material-design high-contrast'
+TAIGA_THEMES='taiga legacy material-design high-contrast'
+```
+
 ### TAIGA_DEFAULT_THEME
 
 _Default value_: `taiga`
@@ -171,9 +191,9 @@ Taiga frontend default theme.
 Examples:
 
 ```yml
-TAIGA_DEBUG_INFO=taiga
-TAIGA_DEBUG_INFO=material-design
-TAIGA_DEBUG_INFO=high-contrast
+TAIGA_DEFAULT_THEME=taiga
+TAIGA_DEFAULT_THEME=material-design
+TAIGA_DEFAULT_THEME=high-contrast
 ```
 
 ### TAIGA_PUBLIC_REGISTER_ENABLED
@@ -278,7 +298,7 @@ TAIGA_CONTRIB_PLUGINS=
 
 _Default value_:
 
-Taiga frontend importers installed. Remember to enable importers in the backend too.
+Taiga frontend importers installed (only for Taiga < 6.0). Remember to enable importers in the backend too.
 
 Examples:
 
@@ -286,6 +306,70 @@ Examples:
 TAIGA_IMPORTERS=github
 TAIGA_IMPORTERS='github jira trello asana'
 TAIGA_IMPORTERS=
+```
+
+### TAIGA_IMPORTER_GITHUB_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [GitHub](https://github.com) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_GITHUB_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_GITHUB_ENABLED=true
+```
+
+### TAIGA_IMPORTER_TRELLO_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [Trello](https://trello.com/) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_TRELLO_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_TRELLO_ENABLED=true
+```
+
+### TAIGA_IMPORTER_JIRA_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [JIRA](https://www.atlassian.com/software/jira) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_JIRA_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_JIRA_ENABLED=true
+```
+
+### TAIGA_IMPORTER_ASANA_ENABLED
+
+_Default value_: `false`
+
+Enable Taiga [Asana](https://asana.com) importer (only for Taiga >= 6.0). Remember to enable it in the backend too.
+
+Examples:
+
+```yml
+TAIGA_IMPORTER_ASANA_ENABLED=false
+```
+
+```yml
+TAIGA_IMPORTER_ASANA_ENABLED=true
 ```
 
 ### TAIGA_GRAVATAR
