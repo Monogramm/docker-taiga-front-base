@@ -5,6 +5,13 @@ declare -A base=(
     [alpine]='alpine'
 )
 
+declare -A version_suffixes=(
+    [3]='-stable'
+    [4]='-stable'
+    [5]='-stable'
+    [6]=''
+)
+
 declare -A dockerVariant=(
     [buster]='debian'
     [buster-slim]='debian-slim'
@@ -42,6 +49,7 @@ githubEnv=
 travisEnv=
 for latest in "${latests[@]}"; do
     version=$(echo "$latest" | cut -d. -f1-2)
+    major=$(echo "$latest" | cut -d. -f1-1)
 
     # Only add versions >= "$min_version"
     if version_greater_or_equal "$version" "$min_version"; then
@@ -74,6 +82,7 @@ for latest in "${latests[@]}"; do
 
             # Replace the variables.
             sed -ri -e '
+                s/%%VERSION_SUFFIX%%/'"${version_suffixes[$major]}"'/g;
                 s/%%VARIANT%%/'"$variant"'/g;
                 s/%%VERSION%%/'"$latest"'/g;
             ' "$dir/Dockerfile"
