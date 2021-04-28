@@ -9,31 +9,25 @@ branches:
   only:
     - develop
     - master
+    - main
+
+before_install:
+  - env | sort
+  - dir="$(pwd)/images/${VERSION}/${VARIANT}"
+
+install:
+  - cd "$dir"
+  # Execute CI build hooks
+  - ./hooks/run build
 
 before_script:
-  - env | sort
-  - dir="images/${VERSION}/${VARIANT}"
-  - file="docker-compose.yml"
+  # Display docker images
+  - docker images
 
 script:
   - cd "$dir"
-  # Test containers build
-  - travis_retry docker-compose -f ${file} build
-  # Test containers run
-  - docker-compose -f ${file} up -d && sleep 60
-  - docker-compose -f ${file} ps
-  - docker-compose -f ${file} logs
-  - docker-compose -f ${file} ps "taiga_front" | grep "Up"
-  # Test containers can be dropped and restarted
-  - docker-compose -f ${file} down
-  - docker-compose -f ${file} up -d && sleep 60
-  - docker-compose -f ${file} ps
-  - docker-compose -f ${file} logs
-  - docker-compose -f ${file} ps "taiga_front" | grep "Up"
-
-after_script:
-  - docker images
-  - docker ps -a
+  # Execute CI test hooks
+  - ./hooks/run test
 
 notifications:
   email: false

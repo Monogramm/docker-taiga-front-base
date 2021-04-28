@@ -1,5 +1,5 @@
 [![License: AGPL v3][uri_license_image]][uri_license]
-[![Build Status](https://travis-ci.org/Monogramm/docker-taiga-front-base.svg)](https://travis-ci.org/Monogramm/docker-taiga-front-base)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Monogramm/docker-taiga-front-base/Docker%20Image%20CI)](https://github.com/Monogramm/docker-taiga-front-base/actions)
 [![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-taiga-front-base.svg)](https://hub.docker.com/r/monogramm/docker-taiga-front-base/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-taiga-front-base.svg)](https://hub.docker.com/r/monogramm/docker-taiga-front-base/)
 [![](https://images.microbadger.com/badges/version/monogramm/docker-taiga-front-base.svg)](https://microbadger.com/images/monogramm/docker-taiga-front-base)
