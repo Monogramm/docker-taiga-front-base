@@ -20,7 +20,7 @@ services:
       dockerfile: ${DOCKERFILE_PATH}
     image: ${IMAGE_NAME}
     # For production
-    #image: monogramm/docker-taiga-front:5.5-alpine
+    #image: monogramm/docker-taiga-front-base:5.5-alpine
     hostname: ${TAIGA_HOSTNAME}
     container_name: taiga_front
     #restart: always
@@ -61,7 +61,7 @@ services:
       - TAIGA_DEBUG=false
       - TAIGA_DEBUG_INFO=false
       - TAIGA_DEFAULT_LANGUAGE=en
-      - TAIGA_THEMES=taiga material-design high-contrast
+      - TAIGA_THEMES=taiga
       - TAIGA_DEFAULT_THEME=taiga
       - TAIGA_PUBLIC_REGISTER_ENABLED=false
       - TAIGA_FEEDBACK_ENABLED=true
@@ -128,41 +128,45 @@ services:
       # Admin account default password
       - TAIGA_ADMIN_PASSWORD=${TAIGA_ADMIN_PASSWORD}
       # Database settings
-      - TAIGA_DB_HOST=taiga_db
-      - TAIGA_DB_NAME=taiga
-      - TAIGA_DB_USER=taiga
-      - TAIGA_DB_PASSWORD=${TAIGA_DB_PWD}
+      - POSTGRES_HOST=taiga_db
+      - POSTGRES_DB=taiga
+      - POSTGRES_USER=taiga
+      - POSTGRES_PASSWORD=${TAIGA_DB_PWD}
       # when the db comes up from docker, it is usually too quick
-      - TAIGA_SLEEP=5
+      - TAIGA_SLEEP=15
       # To use an external SMTP for emails, fill in these values:
-      - TAIGA_ENABLE_EMAIL=True
-      - TAIGA_EMAIL_FROM=taiga@${TAIGA_EMAIL_DOMAIN}
+      - ENABLE_EMAIL=True
+      - DEFAULT_FROM_EMAIL=taiga@${TAIGA_EMAIL_DOMAIN}
       - TAIGA_NOTIFICATIONS_INTERVAL=300
       # Mailcatcher config for tests
-      - TAIGA_EMAIL_USE_TLS=False
-      - TAIGA_EMAIL_HOST=taiga_mailer
-      - TAIGA_EMAIL_PORT=1025
+      - EMAIL_USE_TLS=False
+      - EMAIL_USE_SSL=False
+      - EMAIL_HOST=taiga_mailer
+      - EMAIL_PORT=1025
       # Sample production config
-      #- TAIGA_EMAIL_USE_TLS=True
-      #- TAIGA_EMAIL_HOST=smtp.${TAIGA_EMAIL_DOMAIN}
-      #- TAIGA_EMAIL_PORT=587
-      - TAIGA_EMAIL_USER=${TAIGA_SMTP_USER}
-      - TAIGA_EMAIL_PASS=${TAIGA_SMTP_PWD}
+      #- EMAIL_USE_TLS=True
+      #- EMAIL_HOST=smtp.${TAIGA_EMAIL_DOMAIN}
+      #- EMAIL_PORT=587
+      - EMAIL_HOST_USER=${TAIGA_SMTP_USER}
+      - EMAIL_HOST_PASSWORD=${TAIGA_SMTP_PWD}
       # Backend settings
       - TAIGA_DEBUG=False
-      - TAIGA_PUBLIC_REGISTER_ENABLED=False
-      - TAIGA_FEEDBACK_ENABLED=True
-      - TAIGA_FEEDBACK_EMAIL=taiga@${TAIGA_EMAIL_DOMAIN}
+      - PUBLIC_REGISTER_ENABLED=False
+      - SITEMAP_ENABLED=False
+      - FEEDBACK_ENABLED=True
+      - FEEDBACK_EMAIL=taiga@${TAIGA_EMAIL_DOMAIN}
+      - STATS_ENABLED=False
+      - ENABLE_TELEMETRY=False
       # Events settings
-      - TAIGA_EVENTS_ENABLED=True
-      - RABBIT_USER=${TAIGA_RABBIT_USER}
-      - RABBIT_PASSWORD=${TAIGA_RABBIT_PASSWORD}
-      - RABBIT_VHOST='/'
-      - RABBIT_HOST=taiga_rabbit
-      - RABBIT_PORT=5672
+      - EVENTS_ENABLED=True
+      - RABBITMQ_USER=${TAIGA_RABBIT_USER}
+      - RABBITMQ_PASS=${TAIGA_RABBIT_PASSWORD}
+      - RABBITMQ_VHOST=/taiga
+      - RABBITMQ_HOST=taiga_rabbit
+      - RABBITMQ_PORT=5672
       # Async settings
       # To enable async mode, uncomment the following lines:
-      - TAIGA_ASYNC_ENABLED=True
+      - CELERY_ENABLED=True
       - REDIS_HOST=taiga_redis
       - REDIS_PORT=6379
       ### Additional parameters
@@ -216,7 +220,9 @@ services:
     hostname: ${TAIGA_HOSTNAME}
     container_name: taiga_celery
     #restart: always
-    command: celery -A taiga worker --concurrency 4 -l INFO
+    command: celery -A taiga worker --concurrency 4 -l ERROR
+    # TODO Run with taiga user
+    #command: celery -A taiga worker --uid taiga --gid taiga --concurrency 4 -l INFO
     healthcheck:
       test: celery -A taiga inspect ping --json | grep -q -e '"pong"' || exit 1
       interval: 60s
@@ -248,38 +254,37 @@ services:
       - TAIGA_HOSTNAME=${TAIGA_HOSTNAME}:${TAIGA_HTTP_PORT}
       # Secret key for cryptographic signing
       - TAIGA_SECRET_KEY=${TAIGA_SECRET}
-      # Admin account default password
-      - TAIGA_ADMIN_PASSWORD=${TAIGA_ADMIN_PASSWORD}
       # Database settings
       - TAIGA_SKIP_DB_CHECK=True
-      - TAIGA_DB_HOST=taiga_db
-      - TAIGA_DB_NAME=taiga
-      - TAIGA_DB_USER=taiga
-      - TAIGA_DB_PASSWORD=${TAIGA_DB_PWD}
+      - POSTGRES_HOST=taiga_db
+      - POSTGRES_DB=taiga
+      - POSTGRES_USER=taiga
+      - POSTGRES_PASSWORD=${TAIGA_DB_PWD}
       # when the db comes up from docker, it is usually too quick
-      - TAIGA_SLEEP=5
+      - TAIGA_SLEEP=15
       # To use an external SMTP for emails, fill in these values:
-      - TAIGA_ENABLE_EMAIL=True
-      - TAIGA_EMAIL_FROM=taiga@${TAIGA_EMAIL_DOMAIN}
+      - ENABLE_EMAIL=True
+      - DEFAULT_FROM_EMAIL=taiga@${TAIGA_EMAIL_DOMAIN}
       - TAIGA_NOTIFICATIONS_INTERVAL=300
-      - TAIGA_EMAIL_USE_TLS=False
-      - TAIGA_EMAIL_HOST=mailcatcher
-      - TAIGA_EMAIL_PORT=1025
-      - TAIGA_EMAIL_USER=${TAIGA_SMTP_USER}
-      - TAIGA_EMAIL_PASS=${TAIGA_SMTP_PWD}
+      - EMAIL_USE_TLS=False
+      - EMAIL_USE_SSL=False
+      - EMAIL_HOST=taiga_mailer
+      - EMAIL_PORT=1025
+      - EMAIL_HOST_USER=${TAIGA_SMTP_USER}
+      - EMAIL_HOST_PASSWORD=${TAIGA_SMTP_PWD}
       # Celery settings
       - TAIGA_TIMEZONE=${TAIGA_TIMEZONE}
       - TAIGA_DEBUG=False
       # Events settings
-      - TAIGA_EVENTS_ENABLED=True
-      - RABBIT_USER=${TAIGA_RABBIT_USER}
-      - RABBIT_PASSWORD=${TAIGA_RABBIT_PASSWORD}
-      - RABBIT_VHOST=/
-      - RABBIT_HOST=taiga_rabbit
-      - RABBIT_PORT=5672
+      - EVENTS_ENABLED=True
+      - RABBITMQ_USER=${TAIGA_RABBIT_USER}
+      - RABBITMQ_PASS=${TAIGA_RABBIT_PASSWORD}
+      - RABBITMQ_VHOST=/taiga
+      - RABBITMQ_HOST=taiga_rabbit
+      - RABBITMQ_PORT=5672
       # Async settings
       # To enable async mode, uncomment the following lines:
-      - TAIGA_ASYNC_ENABLED=True
+      - CELERY_ENABLED=True
       - REDIS_HOST=taiga_redis
       - REDIS_PORT=6379
       # FIXME Running a worker with superuser is a very bad idea!
@@ -305,7 +310,7 @@ services:
 
   # To disable taiga-events, comment all the following lines:
   taiga_events:
-    image: monogramm/docker-taiga-events:alpine
+    image: monogramm/docker-taiga-events:5.5-alpine
     container_name: taiga_events
     #restart: always
     depends_on:
@@ -319,11 +324,11 @@ services:
       - external_network
       - internal_network
     environment:
-      - RABBIT_USER=${TAIGA_RABBIT_USER}
-      - RABBIT_PASSWORD=${TAIGA_RABBIT_PASSWORD}
-      - RABBIT_VHOST='/'
-      - RABBIT_HOST=taiga_rabbit
-      - RABBIT_PORT=5672
+      - RABBITMQ_USER=${TAIGA_RABBIT_USER}
+      - RABBITMQ_PASS=${TAIGA_RABBIT_PASSWORD}
+      - RABBITMQ_VHOST=/taiga
+      - RABBITMQ_HOST=taiga_rabbit
+      - RABBITMQ_PORT=5672
       - TAIGA_EVENTS_SECRET=${TAIGA_SECRET}
       - TAIGA_EVENTS_PORT=8888
 
@@ -345,6 +350,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=${TAIGA_RABBIT_USER}
       - RABBITMQ_DEFAULT_PASS=${TAIGA_RABBIT_PASSWORD}
+      - RABBITMQ_DEFAULT_VHOST=taiga
 
   # Test services (do not use in production)
 
@@ -363,6 +369,8 @@ services:
     environment:
       - DOCKER_TEST_CONTAINER=taiga_front
       - DOCKER_WEB_CONTAINER=taiga_front
+      - DOCKER_WEB_PORT=80
+      - DOCKER_WEB_HEALTH_API=conf.json
     volumes_from:
       - taiga_front
       - taiga_back
