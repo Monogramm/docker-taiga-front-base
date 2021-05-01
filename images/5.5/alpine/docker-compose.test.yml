@@ -70,10 +70,10 @@ services:
       - TAIGA_TOS_URL=
       - TAIGA_GDPR_URL=
       - TAIGA_MAX_UPLOAD_SIZE=104857600
-      - TAIGA_CONTRIB_PLUGINS=slack cookie-warning
+      - TAIGA_CONTRIB_PLUGINS=
       #- TAIGA_CONTRIB_PLUGINS=slack cookie-warning gitlab-auth github-auth
       - TAIGA_GRAVATAR=true
-      - TAIGA_LOGIN_FORM_TYPE=ldap
+      - TAIGA_LOGIN_FORM_TYPE=normal
       # Backend settings
       - TAIGA_BACK_HOST=taiga_back
       - TAIGA_BACK_PORT=8001
@@ -81,14 +81,6 @@ services:
       - TAIGA_EVENTS_ENABLED=True
       - TAIGA_EVENTS_HOST=taiga_events
       - TAIGA_EVENTS_PORT=8888
-      ### Additional parameters
-      # GitLab
-      - TAIGA_ENABLE_GITLAB_AUTH=${TAIGA_ENABLE_GITLAB_AUTH}
-      - TAIGA_GITLAB_AUTH_URL=${TAIGA_GITLAB_AUTH_URL}
-      - TAIGA_GITLAB_AUTH_CLIENT_ID=${TAIGA_GITLAB_AUTH_CLIENT_ID}
-      # GitHub
-      - TAIGA_ENABLE_GITHUB_AUTH=${TAIGA_ENABLE_GITHUB_AUTH}
-      - TAIGA_GITHUB_AUTH_CLIENT_ID=${TAIGA_GITHUB_AUTH_CLIENT_ID}
 
   taiga_back:
     # For production
@@ -169,30 +161,6 @@ services:
       - CELERY_ENABLED=True
       - REDIS_HOST=taiga_redis
       - REDIS_PORT=6379
-      ### Additional parameters
-      # Slack
-      - TAIGA_ENABLE_SLACK=True
-      # GitLab
-      - TAIGA_ENABLE_GITLAB_AUTH=${TAIGA_ENABLE_GITLAB_AUTH}
-      - TAIGA_GITLAB_AUTH_URL=${TAIGA_GITLAB_AUTH_URL}
-      - TAIGA_GITLAB_AUTH_CLIENT_ID=${TAIGA_GITLAB_AUTH_CLIENT_ID}
-      - TAIGA_GITLAB_AUTH_CLIENT_SECRET=${TAIGA_GITLAB_AUTH_CLIENT_SECRET}
-      # GitHub
-      - TAIGA_ENABLE_GITHUB_AUTH=${TAIGA_ENABLE_GITHUB_AUTH}
-      - TAIGA_GITHUB_AUTH_CLIENT_ID=${TAIGA_GITHUB_AUTH_CLIENT_ID}
-      - TAIGA_GITHUB_AUTH_CLIENT_SECRET=${TAIGA_GITHUB_AUTH_CLIENT_SECRET}
-      # LDAP Settings
-      - TAIGA_ENABLE_LDAP=${TAIGA_ENABLE_LDAP}
-      - TAIGA_LDAP_SERVER=ldap://${TAIGA_LDAP_DOMAIN}
-      - TAIGA_LDAP_PORT=389
-      - TAIGA_LDAP_USE_TLS=False
-      - TAIGA_LDAP_BIND_DN=${TAIGA_LDAP_BIND_DN}
-      - TAIGA_LDAP_BIND_PASSWORD=${TAIGA_LDAP_BIND_PASSWORD}
-      - TAIGA_LDAP_BASE_DN=${TAIGA_LDAP_BASE_DN}
-      - TAIGA_LDAP_USERNAME_ATTRIBUTE=uid
-      - TAIGA_LDAP_EMAIL_ATTRIBUTE=mail
-      - TAIGA_LDAP_FULL_NAME_ATTRIBUTE=displayName
-      - TAIGA_LDAP_FALLBACK=normal
 
   taiga_db:
     image: postgres:10-alpine
@@ -390,25 +358,6 @@ services:
       - '1025'
     ports:
       - "1080:1080"
-    networks:
-      - internal_network
-    # If you want, you can sync time & timezone with host
-    #volumes:
-    #  - /etc/localtime:/etc/localtime:ro
-    #  - /etc/timezone:/etc/timezone:ro
-
-  # Simple LDAP service for testing
-  taiga_ldap:
-    image: rroemhild/test-openldap:2.1
-    hostname: taiga_ldap
-    container_name: taiga_ldap
-    restart: always
-    expose:
-      - '10389'
-      - '10636'
-    #ports:
-    #  - "10389:10389"
-    #  - "10636:10636"
     networks:
       - internal_network
     # If you want, you can sync time & timezone with host
