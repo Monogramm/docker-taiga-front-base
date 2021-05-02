@@ -10,7 +10,7 @@ log() {
 # Testing docker containers
 
 log "Waiting to ensure everything is fully ready for the tests..."
-sleep 60
+sleep 180
 
 log "Checking main containers are reachable..."
 if ! ping -c 10 -q "${DOCKER_TEST_CONTAINER}" ; then
