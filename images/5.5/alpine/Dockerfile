@@ -40,7 +40,7 @@ RUN set -ex; \
 
 ## Runtime environment variables
 # Taiga nginx, back, front and events properties
-ENV TAIGA_HOSTNAME=localhost \
+ENV TAIGA_SITES_DOMAIN=localhost \
     TAIGA_SSL=False \
     TAIGA_SSL_BY_REVERSE_PROXY=False \
     TAIGA_BACKEND_SSL=False \
@@ -49,20 +49,24 @@ ENV TAIGA_HOSTNAME=localhost \
     TAIGA_DEFAULT_LANGUAGE=en \
     TAIGA_THEMES= \
     TAIGA_DEFAULT_THEME=taiga \
-    TAIGA_PUBLIC_REGISTER_ENABLED=false \
-    TAIGA_FEEDBACK_ENABLED=false \
-    TAIGA_SUPPORT_URL=https://tree.taiga.io/support \
-    TAIGA_PRIVACY_POLICY_URL= \
-    TAIGA_TOS_URL= \
-    TAIGA_GDPR_URL= \
-    TAIGA_MAX_UPLOAD_SIZE=104857600 \
+    PUBLIC_REGISTER_ENABLED=false \
+    FEEDBACK_ENABLED=false \
+    SUPPORT_URL=https://resources.taiga.io/ \
+    PRIVACY_POLICY_URL= \
+    TOS_URL= \
+    GDPR_URL= \
+    MAX_UPLOAD_SIZE=104857600 \
     TAIGA_CONTRIB_PLUGINS= \
     TAIGA_IMPORTERS= \
-    TAIGA_GRAVATAR=true \
-    TAIGA_LOGIN_FORM_TYPE=normal \
+    ENABLE_GITHUB_IMPORTER= \
+    ENABLE_JIRA_IMPORTER= \
+    ENABLE_TRELLO_IMPORTER= \
+    ENABLE_ASANA_IMPORTER= \
+    ENABLE_GRAVATAR=true \
+    LOGIN_FORM_TYPE=normal \
     TAIGA_BACK_HOST=taigaback \
     TAIGA_BACK_PORT=8001 \
-    TAIGA_EVENTS_ENABLED= \
+    EVENTS_ENABLED= \
     TAIGA_EVENTS_HOST=taigaevents \
     TAIGA_EVENTS_PORT=8888
 

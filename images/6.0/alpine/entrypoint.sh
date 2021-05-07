@@ -117,10 +117,10 @@ if [ -n "${TAIGA_FEEDBACK_ENABLED:-$FEEDBACK_ENABLED}" ]; then
     /taiga/conf.json
 fi
 
-if [ -n "${TAIGA_SUPPORT_URL}" ]; then
-  log "Updating Taiga Front support URL: ${TAIGA_SUPPORT_URL}"
+if [ -n "${TAIGA_SUPPORT_URL:-$SUPPORT_URL}" ]; then
+  log "Updating Taiga Front support URL: ${TAIGA_SUPPORT_URL:-$SUPPORT_URL}"
   sed -i \
-    -e "s|\"supportUrl\": .*,|\"supportUrl\": \"${TAIGA_SUPPORT_URL}\",|g" \
+    -e "s|\"supportUrl\": .*,|\"supportUrl\": \"${TAIGA_SUPPORT_URL:-$SUPPORT_URL}\",|g" \
     /taiga/conf.json
 else
   log "Reset Taiga Front support URL"
@@ -129,10 +129,10 @@ else
     /taiga/conf.json
 fi
 
-if [ -n "${TAIGA_PRIVACY_POLICY_URL}" ]; then
-  log "Updating Taiga Front privacy policy URL: ${TAIGA_PRIVACY_POLICY_URL}"
+if [ -n "${TAIGA_PRIVACY_POLICY_URL:-$PRIVACY_POLICY_URL}" ]; then
+  log "Updating Taiga Front privacy policy URL: ${TAIGA_PRIVACY_POLICY_URL:-$PRIVACY_POLICY_URL}"
   sed -i \
-    -e "s|\"privacyPolicyUrl\": .*,|\"privacyPolicyUrl\": \"${TAIGA_PRIVACY_POLICY_URL}\",|g" \
+    -e "s|\"privacyPolicyUrl\": .*,|\"privacyPolicyUrl\": \"${TAIGA_PRIVACY_POLICY_URL:-$PRIVACY_POLICY_URL}\",|g" \
     /taiga/conf.json
 else
   log "Reset Taiga Front privacy policy URL"
@@ -141,10 +141,10 @@ else
     /taiga/conf.json
 fi
 
-if [ -n "${TAIGA_TOS_URL}" ]; then
-  log "Updating Taiga Front terms of services URL: ${TAIGA_TOS_URL}"
+if [ -n "${TAIGA_TOS_URL:-$TOS_URL}" ]; then
+  log "Updating Taiga Front terms of services URL: ${TAIGA_TOS_URL:-$TOS_URL}"
   sed -i \
-    -e "s|\"termsOfServiceUrl\": .*,|\"termsOfServiceUrl\": \"${TAIGA_TOS_URL}\",|g" \
+    -e "s|\"termsOfServiceUrl\": .*,|\"termsOfServiceUrl\": \"${TAIGA_TOS_URL:-$TOS_URL}\",|g" \
     /taiga/conf.json
 else
   log "Reset Taiga Front terms of services URL"
@@ -153,10 +153,10 @@ else
     /taiga/conf.json
 fi
 
-if [ -n "${TAIGA_GDPR_URL}" ]; then
-  log "Updating Taiga Front GDPR compliance URL: ${TAIGA_GDPR_URL}"
+if [ -n "${TAIGA_GDPR_URL:-$GDPR_URL}" ]; then
+  log "Updating Taiga Front GDPR compliance URL: ${TAIGA_GDPR_URL:-$GDPR_URL}"
   sed -i \
-    -e "s|\"GDPRUrl\": .*,|\"GDPRUrl\": \"${TAIGA_GDPR_URL}\",|g" \
+    -e "s|\"GDPRUrl\": .*,|\"GDPRUrl\": \"${TAIGA_GDPR_URL:-$GDPR_URL}\",|g" \
     /taiga/conf.json
 else
   log "Reset Taiga Front GDPR compliance URL"
@@ -165,10 +165,10 @@ else
     /taiga/conf.json
 fi
 
-if [ -n "${TAIGA_MAX_UPLOAD_SIZE}" ]; then
-  log "Updating Taiga Front max upload file size: ${TAIGA_MAX_UPLOAD_SIZE}"
+if [ -n "${TAIGA_MAX_UPLOAD_SIZE:-$MAX_UPLOAD_SIZE}" ]; then
+  log "Updating Taiga Front max upload file size: ${TAIGA_MAX_UPLOAD_SIZE:-$MAX_UPLOAD_SIZE}"
   sed -i \
-    -e "s|\"maxUploadFileSize\": .*,|\"maxUploadFileSize\": ${TAIGA_MAX_UPLOAD_SIZE},|g" \
+    -e "s|\"maxUploadFileSize\": .*,|\"maxUploadFileSize\": ${TAIGA_MAX_UPLOAD_SIZE:-$MAX_UPLOAD_SIZE},|g" \
     /taiga/conf.json
 else
   log "Reset Taiga Front GDPR URL"
@@ -244,10 +244,10 @@ if [ -n "${TAIGA_GRAVATAR:-$ENABLE_GRAVATAR}" ]; then
     /taiga/conf.json
 fi
 
-if [ -n "${TAIGA_LOGIN_FORM_TYPE}" ]; then
-  log "Updating Taiga Front login form type: ${TAIGA_LOGIN_FORM_TYPE}"
+if [ -n "${TAIGA_LOGIN_FORM_TYPE:-$LOGIN_FORM_TYPE}" ]; then
+  log "Updating Taiga Front login form type: ${TAIGA_LOGIN_FORM_TYPE:-$LOGIN_FORM_TYPE}"
   sed -i \
-    -e "s|\"loginFormType\": \".*\"|\"loginFormType\": \"${TAIGA_LOGIN_FORM_TYPE}\"|g" \
+    -e "s|\"loginFormType\": \".*\"|\"loginFormType\": \"${TAIGA_LOGIN_FORM_TYPE:-$LOGIN_FORM_TYPE}\"|g" \
     /taiga/conf.json
 else
   log "Reset Taiga Front login form type"
