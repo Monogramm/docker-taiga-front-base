@@ -14,7 +14,7 @@ COPY conf/taiga/conf.json /taiga/
 ARG TAIGA_VERSION=%%VERSION%%
 
 # Get Taiga
-ADD https://github.com/taigaio/taiga-front-dist/archive/${TAIGA_VERSION}%%VERSION_SUFFIX%%.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}%%VERSION_SUFFIX%%.tar.gz
+ADD https://github.com/kaleidos-ventures/taiga-front-dist/archive/${TAIGA_VERSION}%%VERSION_SUFFIX%%.tar.gz /tmp/taiga-front-dist-${TAIGA_VERSION}%%VERSION_SUFFIX%%.tar.gz
 
 # Install the packages we need
 # Install Taiga from tag archive
