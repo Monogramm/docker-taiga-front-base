@@ -25,10 +25,12 @@ Taiga is a project management platform for startups and agile developers & desig
 
 <!-- >Docker Tags -->
 
--   6.0.10-alpine 6.0-alpine alpine 6.0.10 6.0 latest  (`images/6.0/alpine/Dockerfile`)
--   5.5.10-alpine 5.5-alpine 5.5.10 5.5  (`images/5.5/alpine/Dockerfile`)
--   5.0.15-alpine 5.0-alpine 5.0.15 5.0  (`images/5.0/alpine/Dockerfile`)
--   4.2.14-alpine 4.2-alpine 4.2.14 4.2  (`images/4.2/alpine/Dockerfile`)
+-   6.5.1-alpine 6.5-alpine alpine 6.5.1 6.5 latest  (`images/6.5/alpine/Dockerfile`)
+-   6.4.3-alpine 6.4-alpine 6.4.3 6.4  (`images/6.4/alpine/Dockerfile`)
+-   6.3.3-alpine 6.3-alpine 6.3.3 6.3  (`images/6.3/alpine/Dockerfile`)
+-   6.2.2-alpine 6.2-alpine 6.2.2 6.2  (`images/6.2/alpine/Dockerfile`)
+-   6.1.1-alpine 6.1-alpine 6.1.1 6.1  (`images/6.1/alpine/Dockerfile`)
+-   6.0.10-alpine 6.0-alpine 6.0.10 6.0  (`images/6.0/alpine/Dockerfile`)
 
 <!-- <Docker Tags -->
 
