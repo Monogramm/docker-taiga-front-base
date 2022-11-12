@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx:1.23.2-alpine
 
 LABEL maintainer="Monogramm maintainers <opensource at monogramm dot io>"
 
